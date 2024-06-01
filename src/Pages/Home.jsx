@@ -4,10 +4,14 @@
 // import slide4 from '../assets/christina-2x.jpg';
 // import slide5 from '../assets/jenny-2x.jpg';
 // import { Swiper, SwiperSlide } from 'swiper/react';
+
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import Features from '../Components/Features';
+import HowitWorks from '../Components/HowitWorks';
+import Teestimonials from '../Components/Teestimonials';
 // import { EffectFade, Navigation, Pagination } from 'swiper/modules';
 const Home = () => {
     return (
@@ -41,6 +45,14 @@ const Home = () => {
                 </SwiperSlide>
             </Swiper>
            </> */}
+
+           {/* Feature section */}
+           <Features></Features>
+
+           {/* How it works */}
+           <HowitWorks></HowitWorks>
+
+           <Teestimonials></Teestimonials>
         </div>
     );
 };
