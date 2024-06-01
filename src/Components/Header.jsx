@@ -11,7 +11,8 @@ const Header = () => {
         }
         window.addEventListener('scroll',handleScroll)        
     },[scroll]);
-    console.log(scroll);
+
+    
     return (
         <div  className=''>
             <div id='header' className={`flex justify-between items-center px-12 py-8 fixed w-full z-50 ${scroll > 150 ? 'bg-white text-black shadow-lg' : 'text-black bg-transparent'}`}>
