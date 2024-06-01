@@ -8,9 +8,10 @@ const AuthProvider = ({children}) => {
     const gAuth = new GoogleAuthProvider();
     const [user,setUser] = useState(null);
     const [loading,setLoading] = useState(true);
+    
     const createUser = (email,password) => {
         setLoading(true);
-        return createUserWithEmailAndPassword(auth,email,password);
+        return createUserWithEmailAndPassword(auth,email,password)
     }
 
     const updateUser = (name,photo) => {
@@ -23,17 +24,17 @@ const AuthProvider = ({children}) => {
 
     const login = (email,password) => {
         setLoading(true);
-        return signInWithEmailAndPassword(email,password);
+        return signInWithEmailAndPassword(auth,email,password);
     }
 
     const googleLogin = () => {
         setLoading(true);
-        return signInWithPopup(gAuth);
+        return signInWithPopup(auth,gAuth);
     }
 
     const logout = () => {
         setLoading(true);
-        return signOut();
+        return signOut(auth);
     }
 
     useEffect(() => {
