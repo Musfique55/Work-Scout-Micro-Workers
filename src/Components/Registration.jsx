@@ -55,7 +55,14 @@ const Registration = () => {
                         })
                     })
                     .catch(error => {
-                        console.log(error);
+                        const msg = error.message;
+                        Swal.fire({
+                            position: "center",
+                            icon: "error",
+                            title: `${msg}`,
+                            showConfirmButton: false,
+                            timer: 1500
+                          });
                     })
                 }
             })
@@ -86,6 +93,16 @@ const Registration = () => {
                               });
                         }
                     }
+                })
+                .catch(error => {
+                    const msg = error.message;
+                        Swal.fire({
+                            position: "center",
+                            icon: "error",
+                            title: `${msg}`,
+                            showConfirmButton: false,
+                            timer: 1500
+                          });
                 })
             }
         })

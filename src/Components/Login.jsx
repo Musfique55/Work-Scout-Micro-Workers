@@ -1,9 +1,11 @@
 import reg from '../assets/isometric-feedback-concept-illustrated_23-2148940193.jpg';
 import { useForm } from 'react-hook-form';
 import useAuth from '../Hooks/useAuth';
+import google from '../assets/google.png';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 const Login = () => {
-    const {login} = useAuth();
+    const {login,googleLogin} = useAuth();
     const {
         register,
         handleSubmit,
@@ -14,19 +16,63 @@ const Login = () => {
           const password = data.password;
           login(email,password)
           .then(res => {
-            console.log(res);
+            if(res.user){
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "You have logged in  successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            }
           })
+          .catch(error => {
+            const msg = error.message;
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: `${msg}`,
+                showConfirmButton: false,
+                timer: 1500
+              });
+          })
+      }
+
+      const handleGoogle = () => {
+        googleLogin()
+        .then((res) => {
+            if(res.user){
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "You have logged in  successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            }
+        })
+        .catch(error => {
+            const msg = error.message;
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: `${msg}`,
+                showConfirmButton: false,
+                timer: 1500
+              });
+        })
       }
     return (
         <div className="flex  m-12 gap-10">
             <div className='flex flex-1'>
-                <img src={reg} alt="" className='h-[400px] w-full object-cover'/>
+                <img src={reg} alt="" className='h-[450px] w-full object-cover'/>
             </div>
             <div className='flex-1'>
                 <h3 className='mb-3 text-3xl font-medium'>Welcome Back</h3>
                 <div className='flex mb-5  items-center'>
                   <p>Enter email and password for login</p>
                 </div>
+                <button onClick={handleGoogle} className='flex border-2 items-center gap-4 p-2'><img src={google} alt="" className='h-6 w-6'/> Continue With Google</button>
                 <form className='space-y-8' onSubmit={handleSubmit(onSubmit)}>
                     <div className='flex flex-col'>
                         <label htmlFor='email'>

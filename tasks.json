@@ -1,0 +1,51 @@
+[
+    {
+      "task_title": "Data Entry",
+      "task_detail": "Enter data from paper forms into an Excel spreadsheet.",
+      "task_quantity": 50,
+      "payable_amount": 5,
+      "completion_date": "2024-06-30",
+      "submission_info": "Submit the completed Excel file via email to dataentry@company.com."
+    },
+    {
+      "task_title": "Content Writing",
+      "task_detail": "Write a 500-word blog post on the topic of remote work productivity tips.",
+      "task_quantity": 1,
+      "payable_amount": 50,
+      "completion_date": "2024-06-15",
+      "submission_info": "Upload the blog post to the content management system (CMS)."
+    },
+    {
+      "task_title": "Social Media Marketing",
+      "task_detail": "Create and schedule 10 social media posts for the company's Twitter and Facebook accounts.",
+      "task_quantity": 10,
+      "payable_amount": 8,
+      "completion_date": "2024-06-20",
+      "submission_info": "Provide the scheduled posts details in a Google Sheet and share it with social@company.com."
+    },
+    {
+      "task_title": "Product Testing",
+      "task_detail": "Test the new mobile app features and report any bugs or issues.",
+      "task_quantity": 1,
+      "payable_amount": 100,
+      "completion_date": "2024-06-25",
+      "submission_info": "Submit the bug report using the company's bug tracking system."
+    },
+    {
+      "task_title": "Graphic Design",
+      "task_detail": "Design a new logo for the company's rebranding initiative.",
+      "task_quantity": 1,
+      "payable_amount": 200,
+      "completion_date": "2024-07-05",
+      "submission_info": "Send the logo design files (AI, PNG) to design@company.com."
+    },
+    {
+      "task_title": "Market Research",
+      "task_detail": "Conduct a survey and analyze data on customer preferences for the new product line.",
+      "task_quantity": 1,
+      "payable_amount": 150,
+      "completion_date": "2024-07-10",
+      "submission_info": "Submit the survey results and analysis report in PDF format to research@company.com."
+    }
+  ]
+  
