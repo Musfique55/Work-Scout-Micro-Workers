@@ -7,7 +7,7 @@ import useAuth from '../Hooks/useAuth';
 import useUserInfo from '../Hooks/useUserInfo';
 const Header = () => {
     const {userInfo} = useUserInfo();
-    console.log(userInfo);
+
     const {user,logout} = useAuth();
     const [scroll,setScroll] = useState(0);
     useEffect(() => {

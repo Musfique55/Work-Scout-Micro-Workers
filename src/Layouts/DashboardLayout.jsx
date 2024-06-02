@@ -8,6 +8,7 @@ import { RiCoinsFill } from "react-icons/ri";
 const DashboardLayout = () => {
     const {user} = useAuth();
     const {userInfo} = useUserInfo();
+
     return (
         <div >
             <div className="grid grid-cols-4 ">
@@ -88,8 +89,8 @@ const DashboardLayout = () => {
                         <div className="flex flex-col gap-3 items-center ">
                             <div className="gap-7 justify-between flex items-center">
                             <p className="font-medium">Available Coins(<span className="text-red-500 font-medium">{userInfo.coins}</span>)</p>
-                            <div className="w-12 rounded-full">
-                            <img  src={user?.photoURL} className=" rounded-full"/>
+                            <div className=" rounded-full">
+                            <img  src={user?.photoURL} className="w-12 h-12 rounded-full"/>
                             </div>
                             </div>
                             <div className="gap-3 flex items-center">
