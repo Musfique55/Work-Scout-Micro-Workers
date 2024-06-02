@@ -8,7 +8,7 @@ import useUserInfo from "../Hooks/useUserInfo";
 const Addtask = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [coins,setCoins] = useState(true);
-    const {userInfo} = useUserInfo();
+    const {userInfo,refetch} = useUserInfo();
     const axiosPublic = useAxiosPublic();
     const imageHost = import.meta.env.VITE_IMAGE_HOSTING;
     const hostingUrl = `https://api.imgbb.com/1/upload?key=${imageHost}`;
@@ -75,6 +75,7 @@ const Addtask = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
+                    refetch();
                     reset();
                 }
             })

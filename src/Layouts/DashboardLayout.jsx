@@ -8,7 +8,6 @@ import { RiCoinsFill } from "react-icons/ri";
 const DashboardLayout = () => {
     const {user} = useAuth();
     const {userInfo} = useUserInfo();
-
     return (
         <div >
             <div className="grid grid-cols-4 ">
