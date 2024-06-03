@@ -51,7 +51,8 @@ const Addtask = () => {
             details : data.task_details,
             quantity : parseInt(data.task_quantity),
             deadline : date,
-            email : userInfo.email
+            email : userInfo.email,
+            name : userInfo.displayName
         }
         const {quantity,amount} = taskInfo;
         const total = quantity * amount;

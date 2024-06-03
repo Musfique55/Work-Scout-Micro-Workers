@@ -9,6 +9,9 @@ import ManagerHome from "../Layouts/ManagerHome";
 import Addtask from "../Pages/Addtask";
 import MyTasks from "../Pages/MyTasks";
 import Update from "../Pages/Update";
+import Tasklist from "../Pages/Tasklist";
+import PrivateRoute from "./PrivateRoute";
+import Details from "../Pages/Details";
 
 export const router = createBrowserRouter([
     // public route
@@ -49,7 +52,19 @@ export const router = createBrowserRouter([
                 path : 'my-tasks/update/:id',
                 element : <Update></Update>,
                 loader : ({params}) => fetch(`http://localhost:2000/alltasks/${params.id}`)
-            }
+            },
+            
+            //worker routes
+            {
+                path : 'task-list',
+                element : <PrivateRoute><Tasklist></Tasklist></PrivateRoute>
+            },
+            {
+                path : 'task-list/details/:id',
+                element : <Details></Details>,
+                loader : ({params}) => fetch(`http://localhost:2000/alltasks/${params.id}`)
+            } 
+
         ]
     },
     {

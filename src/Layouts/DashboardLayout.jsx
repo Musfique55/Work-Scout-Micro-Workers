@@ -27,7 +27,7 @@ const DashboardLayout = () => {
                                     <FaHome></FaHome>
                                 Home
                                 </NavLink>
-                                <NavLink to='/dashboard/tasklist' className='flex items-center gap-4 text-xl font-medium'>
+                                <NavLink to='/dashboard/task-list' className='flex items-center gap-4 text-xl font-medium'>
                                     <FaTasks></FaTasks>
                                     Task List
                                 </NavLink>

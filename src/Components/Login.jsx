@@ -2,10 +2,11 @@ import reg from '../assets/isometric-feedback-concept-illustrated_23-2148940193.
 import { useForm } from 'react-hook-form';
 import useAuth from '../Hooks/useAuth';
 import google from '../assets/google.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 const Login = () => {
     const {login,googleLogin} = useAuth();
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -17,6 +18,7 @@ const Login = () => {
           login(email,password)
           .then(res => {
             if(res.user){
+                navigate('/');  
                 Swal.fire({
                     position: "center",
                     icon: "success",
@@ -41,6 +43,7 @@ const Login = () => {
       const handleGoogle = () => {
         googleLogin()
         .then((res) => {
+            navigate('/');
             if(res.user){
                 Swal.fire({
                     position: "center",
