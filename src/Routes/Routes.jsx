@@ -7,6 +7,8 @@ import Dashboard from "../Pages/Dashboard";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import ManagerHome from "../Layouts/ManagerHome";
 import Addtask from "../Pages/Addtask";
+import MyTasks from "../Pages/MyTasks";
+import Update from "../Pages/Update";
 
 export const router = createBrowserRouter([
     // public route
@@ -38,6 +40,15 @@ export const router = createBrowserRouter([
             {
                 path : 'add-tasks',
                 element : <Addtask></Addtask>
+            },
+            {
+                path : 'my-tasks',
+                element : <MyTasks></MyTasks>
+            },
+            {
+                path : 'my-tasks/update/:id',
+                element : <Update></Update>,
+                loader : ({params}) => fetch(`http://localhost:2000/alltasks/${params.id}`)
             }
         ]
     },
