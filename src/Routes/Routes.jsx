@@ -12,6 +12,7 @@ import Update from "../Pages/Update";
 import Tasklist from "../Pages/Tasklist";
 import PrivateRoute from "./PrivateRoute";
 import Details from "../Pages/Details";
+import Submissions from "../Pages/Submissions";
 
 export const router = createBrowserRouter([
     // public route
@@ -61,9 +62,13 @@ export const router = createBrowserRouter([
             },
             {
                 path : 'task-list/details/:id',
-                element : <Details></Details>,
+                element : <PrivateRoute><Details></Details></PrivateRoute>,
                 loader : ({params}) => fetch(`http://localhost:2000/alltasks/${params.id}`)
-            } 
+            },
+            {
+                path : 'my-submissions',
+                element : <PrivateRoute><Submissions></Submissions></PrivateRoute>
+            },
 
         ]
     },
