@@ -1,10 +1,16 @@
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useUserInfo from "../Hooks/useUserInfo";
-import { MdBlock, MdOutlineDone } from "react-icons/md";
+import { MdBlock, MdOutlineDone, MdOutlinePayment, MdOutlinePendingActions } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
+import { FaCoins } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import useAuth from "../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const ManagerDashboard = () => {
     const axiosSecure = useAxiosSecure();
+    const {user} = useAuth();
+    const [myTask,setMyTasks] = useState([]);
     const {userInfo} = useUserInfo();
     const {data : requests = [],refetch} = useQuery({
         queryKey : ['requests',userInfo.email],
@@ -13,6 +19,13 @@ const ManagerDashboard = () => {
             return res.data;
         }
     })
+
+    useEffect(() => {
+        axiosSecure(`/alltasks?email=${user?.email}`)
+        .then(res => {
+            setMyTasks(res.data);
+        })
+    },[user,axiosSecure])
 
     const handleApprove = (task) => {
         const action = {
@@ -40,7 +53,15 @@ const ManagerDashboard = () => {
 
         axiosSecure.post('/approved',approvedTask)
         .then(res => {
-            console.log(res.data);
+            if(res.data.insertedId){
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Task has been approved",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            }
         })
     }
     const handleReject = (id) => {
@@ -54,8 +75,38 @@ const ManagerDashboard = () => {
             }
         })
     }
+
+    const remainingTasks = myTask.reduce((acc,curr) => acc + curr.task_quantity,0);
     return (
-        <div className="mt-12">
+        <div className="mt-12 mx-5">
+
+            <h3 className="text-5xl font-medium mb-8">Welcome Back</h3>
+            <div className="flex gap-6 items-center">
+               <div className="grid grid-cols-3 gap-14">
+                    <div className="flex items-center gap-5 bg-[#9169c5b0] text-white p-8 rounded-2xl">
+                        <FaCoins className="text-3xl"></FaCoins>
+                        <div>
+                           <p className="text-4xl font-medium">{userInfo.coins}</p>     
+                           <h5 className="text-2xl font-medium">Available Coins</h5>         
+                        </div>
+                    </div>
+                    <div className="flex items-center gap-5 bg-[#9169c5b0] text-white p-8 rounded-2xl">
+                        <MdOutlinePendingActions className="text-4xl"/>
+                        <div>
+                           <p className="text-4xl font-medium">{remainingTasks}</p>     
+                           <h5 className="text-2xl font-medium">Pending Tasks</h5>         
+                        </div>
+                    </div>
+                    <div className="flex items-center gap-5 bg-[#9169c5b0] text-white p-8 rounded-2xl">
+                        <MdOutlinePayment className="text-4xl"/>
+                        <div>
+                           <p className="text-4xl font-medium">0</p>     
+                           <h5 className="text-2xl font-medium">Total Payment</h5>         
+                        </div>
+                    </div>
+               </div>
+            </div>
+            <h3 className="text-3xl font-semibold my-8">Submission Requests</h3>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}

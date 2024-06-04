@@ -58,7 +58,6 @@ const Details = () => {
         }
         axiosSecure.post('/submissions',subInfo)
         .then(res => {
-            console.log(res);
             if(res.data.insertedId){
                 Swal.fire({
                     position: "center",
@@ -117,7 +116,7 @@ const Details = () => {
                     <div>
                         <h5 className="mt-5 mb-2">Submission Form</h5>
                         <form onSubmit={handleSubmit}>
-                            <textarea name="taskdetails" id="" rows={4} cols={28} className="focus:outline-none p-1">
+                            <textarea name="taskdetails" id="" rows={4} cols={31} className="focus:outline-none p-1">
                             </textarea>
                             <button type="submit" className="w-full py-2 bg-[#8849da]  text-white">Submit</button>
                         </form>
