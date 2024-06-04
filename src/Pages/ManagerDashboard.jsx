@@ -14,10 +14,13 @@ const ManagerDashboard = () => {
         }
     })
 
-    const handleApprove = (id) => {
+    const handleApprove = (id,email,amount) => {
         const action = {
-            approve : 'approve'
+            approve : 'approved',
+            worker_email : email,
+            amount : parseInt(amount)
         }
+        
         axiosSecure.patch(`/submissions/${id}`,action)
         .then(res => {
             if(res.data.modifiedCount > 0){
@@ -25,7 +28,7 @@ const ManagerDashboard = () => {
             }
         })
     }
-    const handleReject = (id) => {
+    const handleReject = (id,) => {
         const action = {
             approve : 'rejected'
         }
@@ -46,10 +49,10 @@ const ManagerDashboard = () => {
                         <th>
                         
                         </th>
-                        <th>Task</th>
+                        <th>Worker Info</th>
                         <th>Title</th>
+                        <th>Payable Amount</th>
                         <th>Status</th>
-                        <th>Task Id</th>
                         <th>Submiited</th>
                         <th>Action</th>
                     </tr>
@@ -63,31 +66,29 @@ const ManagerDashboard = () => {
                                 {idx+1}
                             </th>
                             <td>
-                            <div className="flex items-center gap-3">
-                                <div className="avatar">
-                                <div className="mask mask-squircle w-12 h-12">
-                                    <img src={submission.task_img_url}  />
-                                </div>
-                                </div>
+                            <div className="flex flex-col justify-center font-medium gap-3">
+                                <p>{submission.worker_email}</p>
+                                <p>{submission.worker_name}</p>
                             </div>
                             </td>
                             <td>
                                 {submission.task_title}
                             </td>
+                            
+                            <td className="font-semibold flex justify-center" >
+                                {submission.payable_amount}
+                            </td>
                             <td >
-                                <p className={`px-3 py-1 rounded-full  w-fit ${submission.status === 'approve'? 'bg-[rgba(65,221,65,0.438)] text-green-600' : submission.status === 'rejected' ? 'text-red-600 bg-[rgba(223,48,48,0.39)]' : 'bg-[rgba(255,255,0,0.29)] text-yellow-600'}`}>
+                                <p className={`px-3 py-1 rounded-full  w-fit ${submission.status === 'approved'? 'bg-[rgba(65,221,65,0.438)] text-green-600' : submission.status === 'rejected' ? 'text-red-600 bg-[rgba(223,48,48,0.39)]' : 'bg-[rgba(255,255,0,0.29)] text-yellow-600'}`}>
                                 {submission.status}
                                 </p>
                                 
-                            </td>
-                            <td>
-                                {submission.task_id}
                             </td>
                             <th>
                                 {submission.current_date}
                             </th>
                             <td className="flex gap-4">
-                                <MdOutlineDone onClick={() => handleApprove(submission._id)} className="text-4xl p-2 rounded-full text-green-600 bg-[rgba(65,221,65,0.438)] cursor-pointer"/>
+                                <MdOutlineDone onClick={() => handleApprove(submission._id,submission.worker_email,submission.payable_amount)} className="text-4xl p-2 rounded-full text-green-600 bg-[rgba(65,221,65,0.438)] cursor-pointer"/>
                                 <MdBlock onClick={() => handleReject(submission._id)} className="text-4xl p-2 rounded-full text-red-600 bg-[rgba(223,48,48,0.39)] cursor-pointer"/>
                             </td>
                         </tr>)

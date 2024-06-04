@@ -10,7 +10,7 @@ const DashboardLayout = () => {
     const {userInfo} = useUserInfo();
     return (
         <div >
-            <div className="grid grid-cols-4 ">
+            <div className="grid grid-cols-5 ">
                 <div className="border-r col-span-1 row-span-6 min-h-screen">
                     <div className="mx-8 pt-8">
                         <Link to='/'>
@@ -81,12 +81,12 @@ const DashboardLayout = () => {
                             </>
                         }
                         
-                        <NavLink to="/" className="mt-5 pt-5 border-t flex items-center gap-4 text-xl font-medium">
+                        <NavLink to="/" className="mt-5 pt-5 border-t-2 flex items-center gap-4 text-xl font-medium mr-5">
                             <FaHome></FaHome>
                             Go to Home</NavLink>  
                     </div>
                 </div>
-                <div className="col-span-3 pt-8  mr-12"> 
+                <div className="col-span-4 pt-8  mr-12"> 
                     <div className="flex-1 flex items-center justify-end">
                         <div className="flex flex-col gap-3 items-center ">
                             <div className="gap-7 justify-between flex items-center">
@@ -108,7 +108,7 @@ const DashboardLayout = () => {
                     </button>
                     </div>
                 </div>
-                <div className="col-span-3">
+                <div className="col-span-4">
                 <Outlet></Outlet>
                 </div>
             </div>
