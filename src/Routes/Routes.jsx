@@ -3,9 +3,7 @@ import Layout from "../Layouts/Layout";
 import Home from "../Pages/Home";
 import Login from "../Components/Login";
 import Registration from "../Components/Registration";
-import Dashboard from "../Pages/Dashboard";
 import DashboardLayout from "../Layouts/DashboardLayout";
-import ManagerHome from "../Layouts/ManagerHome";
 import Addtask from "../Pages/Addtask";
 import MyTasks from "../Pages/MyTasks";
 import Update from "../Pages/Update";
@@ -13,6 +11,8 @@ import Tasklist from "../Pages/Tasklist";
 import PrivateRoute from "./PrivateRoute";
 import Details from "../Pages/Details";
 import Submissions from "../Pages/Submissions";
+import WorkerDashboard from "../Pages/WorkerDashboard";
+import ManagerDashboard from "../Pages/ManagerDashboard";
 
 export const router = createBrowserRouter([
     // public route
@@ -33,13 +33,8 @@ export const router = createBrowserRouter([
         element : <DashboardLayout></DashboardLayout>,
         children : [
             {
-                index : true,
-                element : <Dashboard></Dashboard>
-            },
-            // manager routes
-            {
                 path : 'manager-home',
-                element : <ManagerHome></ManagerHome>
+                element : <ManagerDashboard></ManagerDashboard>
             },
             {
                 path : 'add-tasks',
@@ -56,6 +51,10 @@ export const router = createBrowserRouter([
             },
             
             //worker routes
+            {
+                path : 'worker-home',
+                element : <WorkerDashboard></WorkerDashboard>,
+            },
             {
                 path : 'task-list',
                 element : <PrivateRoute><Tasklist></Tasklist></PrivateRoute>

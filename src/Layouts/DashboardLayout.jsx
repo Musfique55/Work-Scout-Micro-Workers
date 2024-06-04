@@ -37,6 +37,7 @@ const DashboardLayout = () => {
                                 </NavLink>
                             </>
                         }
+                        
                         {
                             userInfo.role === 'taskCreator' && 
                             <>
@@ -80,7 +81,9 @@ const DashboardLayout = () => {
                             </>
                         }
                         
-                            
+                        <NavLink to="/" className="mt-5 pt-5 border-t flex items-center gap-4 text-xl font-medium">
+                            <FaHome></FaHome>
+                            Go to Home</NavLink>  
                     </div>
                 </div>
                 <div className="col-span-3 pt-8  mr-12"> 

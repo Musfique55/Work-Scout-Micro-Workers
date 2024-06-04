@@ -5,17 +5,39 @@ import { FaCirclePlus } from 'react-icons/fa6';
 import { useEffect, useState } from 'react';
 import useAuth from '../Hooks/useAuth';
 import useUserInfo from '../Hooks/useUserInfo';
+import { Player } from '@lottiefiles/react-lottie-player';
 const Header = () => {
     const {userInfo} = useUserInfo();
-
+    const [findUser,setFindUser] = useState(true);
     const {user,logout} = useAuth();
     const [scroll,setScroll] = useState(0);
     useEffect(() => {
         const handleScroll = () => {
             setScroll(window.scrollY);
         }
-        window.addEventListener('scroll',handleScroll)        
+        window.addEventListener('scroll',handleScroll);      
     },[scroll]);
+
+    const loader =
+    <Player
+    autoplay
+    loop
+    src="https://lottie.host/47e12094-cada-45be-b9f0-47a35c570531/Xz6EddocLm.json"
+    style={{ height: '300px', width: '300px', marginLeft : 'auto',marginRight : 'auto'}}
+    >
+    </Player>
+    
+    useEffect(() => {
+        if(userInfo){
+            setFindUser(false);
+        }else{
+            setFindUser(true);
+        }
+    },[userInfo])
+
+    if(findUser){
+        return loader;
+    }
 
     const handleLogout = async () => {
         await logout();
@@ -54,10 +76,18 @@ const Header = () => {
                 Watch Demo
             </NavLink>
             {
-                user && 
-                <NavLink to='/dashboard'>
+                (user && userInfo.role === 'worker') &&
+                <NavLink to={`/dashboard/worker-home`}>
                     Dashboard
                 </NavLink>
+                
+            }
+            {
+                (user && userInfo.role === 'taskCreator') &&
+                <NavLink to={`/dashboard/manager-home`}>
+                    Dashboard
+                </NavLink>
+                
             }
             {
                 user && 
@@ -67,7 +97,7 @@ const Header = () => {
             }
             {
                 user && 
-                <NavLink to='/dashboard'>
+                <NavLink to=''>
                     Profile
                 </NavLink>
             }
@@ -85,8 +115,14 @@ const Header = () => {
                 Watch Demo
             </NavLink>
             {
-                user && 
-                <NavLink to='/dashboard'>
+                (user && userInfo.role === 'worker') &&
+                <NavLink to={`/dashboard/worker-home`}>
+                    Dashboard
+                </NavLink>
+            }
+            {
+                (user && userInfo.role === 'taskCreator') &&
+                <NavLink to={`/dashboard/manager-home`}>
                     Dashboard
                 </NavLink>
             }

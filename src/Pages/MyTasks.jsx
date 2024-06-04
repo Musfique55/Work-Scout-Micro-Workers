@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import useUserInfo from "../Hooks/useUserInfo";
 import { useEffect, useState } from "react";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 const MyTasks = () => {
     const {user,loading} = useAuth();
@@ -20,6 +21,16 @@ const MyTasks = () => {
             return res.data;
         }
     })
+
+    const loader =
+    <Player
+    autoplay
+    loop
+    src="https://lottie.host/47e12094-cada-45be-b9f0-47a35c570531/Xz6EddocLm.json"
+    style={{ height: '300px', width: '300px', marginLeft : 'auto',marginRight : 'auto'}}
+    >
+    </Player>
+
     useEffect(() => {
         if(userInfo){
             setCoins(false);
@@ -29,7 +40,7 @@ const MyTasks = () => {
     },[userInfo])
    
     if(coins){
-        return <p>Please Wait....</p>
+        return loader
     }
 
    console.log(mytasks);
