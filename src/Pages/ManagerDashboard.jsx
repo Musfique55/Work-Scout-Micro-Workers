@@ -14,21 +14,36 @@ const ManagerDashboard = () => {
         }
     })
 
-    const handleApprove = (id,email,amount) => {
+    const handleApprove = (task) => {
         const action = {
             approve : 'approved',
-            worker_email : email,
-            amount : parseInt(amount)
+            worker_email :task?.worker_email,
+            payable_amount : task?.payable_amount,
+            task_title : task?.task_title,
+            creator_name : task?.creator_name,
+            status : task?.status
+        }
+        const approvedTask = {
+            worker_email :task?.worker_email,
+            payable_amount : task?.payable_amount,
+            task_title : task?.task_title,
+            creator_name : task?.creator_name,
+            status : 'approved'
         }
         
-        axiosSecure.patch(`/submissions/${id}`,action)
+        axiosSecure.patch(`/submissions/${task._id}`,action)
         .then(res => {
             if(res.data.modifiedCount > 0){
                 refetch();
             }
         })
+
+        axiosSecure.post('/approved',approvedTask)
+        .then(res => {
+            console.log(res.data);
+        })
     }
-    const handleReject = (id,) => {
+    const handleReject = (id) => {
         const action = {
             approve : 'rejected'
         }
@@ -88,7 +103,7 @@ const ManagerDashboard = () => {
                                 {submission.current_date}
                             </th>
                             <td className="flex gap-4">
-                                <MdOutlineDone onClick={() => handleApprove(submission._id,submission.worker_email,submission.payable_amount)} className="text-4xl p-2 rounded-full text-green-600 bg-[rgba(65,221,65,0.438)] cursor-pointer"/>
+                                <MdOutlineDone onClick={() => handleApprove(submission)} className="text-4xl p-2 rounded-full text-green-600 bg-[rgba(65,221,65,0.438)] cursor-pointer"/>
                                 <MdBlock onClick={() => handleReject(submission._id)} className="text-4xl p-2 rounded-full text-red-600 bg-[rgba(223,48,48,0.39)] cursor-pointer"/>
                             </td>
                         </tr>)
