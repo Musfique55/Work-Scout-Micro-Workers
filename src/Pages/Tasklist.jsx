@@ -11,7 +11,7 @@ const Tasklist = () => {
             return res.data;
         }
     })
-    console.log(tasks);
+    // console.log(tasks);
     return (
         <div className="m-5">
             {

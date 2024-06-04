@@ -3,13 +3,15 @@ import google from '../assets/google.png';
 import { useForm } from 'react-hook-form';
 import useAuth from '../Hooks/useAuth';
 import useAxiosPublic from '../Hooks/useAxiosPublic';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 const Registration = () => {
-    const {createUser,googleLogin,update} = useAuth();
+    const {createUser,googleLogin,update,logout} = useAuth();
     const axiosPublic = useAxiosPublic();
     const imageHosting = import.meta.env.VITE_IMAGE_HOSTING;
     const hostingURL = `https://api.imgbb.com/1/upload?key=${imageHosting}`;
+    const navigate = useNavigate();
+    const location = useLocation();
     const {
         register,
         handleSubmit,
@@ -51,8 +53,13 @@ const Registration = () => {
                                     showConfirmButton: false,
                                     timer: 1500
                                   });
+                                logout()
+                                .then(() => {
+                                    navigate('/login');
+                                })
                             }
                         })
+                        
                     })
                     .catch(error => {
                         const msg = error.message;
@@ -72,6 +79,7 @@ const Registration = () => {
       const handleGoogle = () => {
         googleLogin()
         .then(res => {
+            navigate(location?.state ? location.state : '/');
             if(res.user){
                 const userInfo = {
                     image : res.user.photoURL,
