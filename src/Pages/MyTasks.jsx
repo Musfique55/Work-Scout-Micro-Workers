@@ -20,7 +20,6 @@ const MyTasks = () => {
             return res.data;
         }
     })
-
     useEffect(() => {
         if(userInfo){
             setCoins(false);
@@ -33,7 +32,7 @@ const MyTasks = () => {
         return <p>Please Wait....</p>
     }
 
-   
+   console.log(mytasks);
 
     const handleDelete =(id) => {
         Swal.fire({
@@ -90,13 +89,13 @@ const MyTasks = () => {
                             </th>
                             <td>
                                 <div>
-                                    <div className="font-bold">{task.title}</div>
+                                    <div className="font-bold">{task.task_title}</div>
                                 </div>
                             </td>
                             <td>
-                                <p>{task.quantity}</p>
+                                <p>{task.task_quantity}</p>
                             </td>
-                            <td>{task.quantity * task.amount}</td>
+                            <td>{task.task_quantity * task.payable_amount}</td>
                             <th>
                             <Link to={`update/${task._id}`}><button className="btn bg-[#e5d5fa] btn-xs">Update</button></Link>
                             </th>

@@ -45,17 +45,17 @@ const Addtask = () => {
         const image = res.data.data.display_url;
         const taskInfo = {
             image : image,
-            amount : parseInt(data.payable_amount),
+            payable_amount : parseInt(data.payable_amount),
             submission_info : data.submission_info,
-            title : data.taskTitle,
-            details : data.task_details,
-            quantity : parseInt(data.task_quantity),
-            deadline : date,
-            email : userInfo.email,
-            name : userInfo.displayName
+            task_title : data.taskTitle,
+            task_detail : data.task_details,
+            task_quantity : parseInt(data.task_quantity),
+            dealine : date,
+            creator_email : userInfo.email,
+            creator_name : userInfo.displayName
         }
-        const {quantity,amount} = taskInfo;
-        const total = quantity * amount;
+        const {task_quantity,payable_amount} = taskInfo;
+        const total = task_quantity * payable_amount;
         if(total > userInfo.coins){
             return Swal.fire({
                 position: "center",

@@ -4,7 +4,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const Update = () => {
     const data = useLoaderData();
-    const {title,details,_id,submission_info} = data;
+    const {task_title,task_detail,_id,submission_info} = data;
     const axiosSecure = useAxiosSecure();
     const handleUpdate = async(e) => {
         e.preventDefault();
@@ -44,7 +44,7 @@ const Update = () => {
                         <label>
                             Task Title
                         </label>
-                        <input name='title' defaultValue={title} className='mt-2 border-2 p-2 focus:outline-none'/>
+                        <input name='title' defaultValue={task_title} className='mt-2 border-2 p-2 focus:outline-none'/>
                         
                     </div>
                     
@@ -52,7 +52,7 @@ const Update = () => {
                         <label >
                            Task Details
                         </label>
-                        <input name='details' defaultValue={details} type='text' className='border-2 mt-2 p-2 focus:outline-none'/>
+                        <input name='details' defaultValue={task_detail} type='text' className='border-2 mt-2 p-2 focus:outline-none'/>
                     </div>
                     <div className='flex flex-col'>
                         <label >

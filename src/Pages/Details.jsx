@@ -32,27 +32,27 @@ const renderer = ({days, hours, minutes, seconds, completed }) => {
 
 const Details = () => {
     const data = useLoaderData();
-    const {_id,image,title,details,deadline,amount,email,submission_info,quantity,name} = data;
+    const {_id,image,task_title,task_detail,dealine,payable_amount,creator_email,submission_info,task_quantity,creator_name} = data;
     const {user} = useAuth();
     const axiosSecure = useAxiosSecure();
-    const countDownDate = new Date(deadline);
+    const countDownDate = new Date(dealine);
     const deadlineDate = countDownDate.getTime();
-
+    console.log(countDownDate);
     const handleSubmit = e => {
         e.preventDefault();
         const date = new Date().toDateString();
         const taskDetails = e.target.taskdetails.value;
         const subInfo = {
             task_id : _id,
-            task_title : title,
-            task_detail : details,
+            task_title : task_title,
+            task_detail : task_detail,
             task_img_url : image,
-            payable_amount : amount,
+            payable_amount : payable_amount,
             worker_email : user.email,
             submission_details : taskDetails,
             worker_name : user.displayName,
-            creator_name : name,
-            creator_email : email,
+            creator_name : creator_name,
+            creator_email : creator_email,
             current_date : date,
             status : 'pending' 
         }
@@ -72,18 +72,18 @@ const Details = () => {
         })
     }
     return ( 
-        <div className="grid grid-cols-3 gap-6  mt-12 mx-5">
+        <div className="grid grid-cols-3 gap-6  my-12 mx-5">
             <div className="col-span-2 rounded-xl p-7 bg-gray-100">
                 <div>
-                    <img src={image} alt="" className="w-full h-[300px] object-cover rounded-lg"/>
+                    <img src={image} alt="" className="w-full h-[300px] object-contain rounded-lg"/>
                 </div>
                 <div>
                     <h3 className="mt-8 font-semibold text-2xl mb-5">Task Title</h3>
-                    <p className="text-4xl font-medium">{title}</p>
+                    <p className="text-4xl font-medium">{task_title}</p>
                 </div>
                 <div>
                 <h3 className="mt-8 font-semibold text-2xl mb-5">Task Details</h3>
-                <p className="font-normal">{details}</p>
+                <p className="font-normal">{task_detail}</p>
                 </div>
             </div>
             <div className="rounded-xl p-7 bg-gray-100">
@@ -96,15 +96,15 @@ const Details = () => {
                     </div>
                     <div className="mt-5">
                         <p className="text-gray-700 text-sm">Hiring Manager</p>
-                        <p>{name}</p>
-                        <p>{email}</p>
+                        <p>{creator_name}</p>
+                        <p>{creator_email}</p>
                     </div>
                     <div className="mt-5">
-                        <p className="text-gray-700 text-lg">Available: {quantity}</p>
+                        <p className="text-gray-700 text-lg">Available: {task_quantity}</p>
                     </div>
                     <div className="mt-5">
                         <p className="text-gray-700 text-sm">Amount</p>
-                        <p className="text-lg">{amount}</p>
+                        <p className="text-lg">{payable_amount}</p>
                     </div>
                     <div className="mt-5">
                         <p className="text-gray-700 text-sm">Submission Info</p>

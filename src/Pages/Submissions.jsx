@@ -51,7 +51,7 @@ const Submissions = () => {
                                 {submission.task_title}
                             </td>
                             <td >
-                                <p className={`px-3 py-1 rounded-full  w-fit ${submission.status === 'pending'? 'bg-[rgba(255,255,0,0.29)]' : 'bg-green-200' } `}>
+                                <p className={`px-3 py-1 rounded-full  w-fit ${submission.status === 'pending'? 'bg-[rgba(255,255,0,0.29)] text-yellow-600'  : 'bg-[rgba(65,221,65,0.438)] text-green-600' } `}>
                                 {submission.status}
                                 </p>
                                 
