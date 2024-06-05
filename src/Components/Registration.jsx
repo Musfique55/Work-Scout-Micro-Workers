@@ -37,6 +37,7 @@ const Registration = () => {
                 name,
                 role,
                 coins : data.role === 'worker' ? 10 : 50,
+                task_completion : 0
             }
             createUser(email,password)
             .then(res => {
@@ -86,7 +87,8 @@ const Registration = () => {
                     email : res.user.email,
                     name : res.user.displayName,
                     role : 'worker',
-                    coins : 10 
+                    coins : 10,
+                    task_completion : 0
                 }
                 axiosPublic.post('/users',userInfo)
                 .then(res => {

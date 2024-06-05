@@ -13,7 +13,6 @@ const Tasklist = () => {
     })
 
     const filterData = tasks.filter(task => task.task_quantity > 0);
-
     return (
         <div className="m-5">
             {

@@ -12,6 +12,7 @@ import 'swiper/css/pagination';
 import Features from '../Components/Features';
 import HowitWorks from '../Components/HowitWorks';
 import Teestimonials from '../Components/Teestimonials';
+import TopEarners from '../Components/TopEarners';
 // import { EffectFade, Navigation, Pagination } from 'swiper/modules';
 const Home = () => {
     return (
@@ -52,6 +53,10 @@ const Home = () => {
            {/* How it works */}
            <HowitWorks></HowitWorks>
 
+           {/* top earners */}
+           <TopEarners></TopEarners>
+
+           {/* testimonial */}
            <Teestimonials></Teestimonials>
         </div>
     );

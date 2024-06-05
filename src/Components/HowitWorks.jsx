@@ -5,7 +5,7 @@ import { SlNote } from "react-icons/sl";
 const HowitWorks = () => {
     return (
         <div className="px-12 py-20 mt-12 bg-[#e5d5fa]">
-            <h2 className='text-4xl mb-10'>How it Works</h2>
+            <h2 className='text-4xl font-medium mb-10'>How it Works</h2>
 
             <div className="grid grid-cols-3 gap-10">
                 <div className="p-16 bg-white rounded-2xl">
