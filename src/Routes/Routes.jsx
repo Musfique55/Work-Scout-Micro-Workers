@@ -13,12 +13,16 @@ import Details from "../Pages/Details";
 import Submissions from "../Pages/Submissions";
 import WorkerDashboard from "../Pages/WorkerDashboard";
 import ManagerDashboard from "../Pages/ManagerDashboard";
+import ErrorPage from "../Pages/ErrorPage";
+import ForbiddenAccess from "../Pages/ForbiddenAccess";
+import Withdrawals from "../Pages/Withdrawals";
 
 export const router = createBrowserRouter([
     // public route
     {
         path : '/',
         element : <Layout></Layout>,
+        errorElement : <ErrorPage></ErrorPage>,
         children : [
         {
             path : '/',
@@ -68,6 +72,10 @@ export const router = createBrowserRouter([
                 path : 'my-submissions',
                 element : <PrivateRoute><Submissions></Submissions></PrivateRoute>
             },
+            {
+                path :'withdrawals',
+                element : <Withdrawals></Withdrawals>
+            }
 
         ]
     },
@@ -78,5 +86,9 @@ export const router = createBrowserRouter([
     {
         path : '/register',
         element : <Registration></Registration>
+    },
+    {
+        path : '/forbidden',
+        element : <ForbiddenAccess></ForbiddenAccess>
     }
 ])

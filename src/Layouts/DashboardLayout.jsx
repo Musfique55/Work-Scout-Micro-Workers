@@ -5,6 +5,7 @@ import useUserInfo from "../Hooks/useUserInfo";
 import { FaHistory, FaHome, FaTasks, FaUsers } from "react-icons/fa";
 import { AiOutlineFileDone, AiOutlinePlusSquare } from "react-icons/ai";
 import { RiCoinsFill } from "react-icons/ri";
+import { BiMoneyWithdraw } from "react-icons/bi";
 const DashboardLayout = () => {
     const {user} = useAuth();
     const {userInfo} = useUserInfo();
@@ -34,6 +35,10 @@ const DashboardLayout = () => {
                                 <NavLink to='/dashboard/my-submissions' className='flex items-center gap-4 text-xl font-medium '>
                                     <AiOutlineFileDone className="text-2xl"/>
                                     My Submissions
+                                </NavLink>
+                                <NavLink to='/dashboard/withdrawals' className='flex items-center gap-4 text-xl font-medium '>
+                                    <BiMoneyWithdraw  className="text-2xl"/>
+                                    Withdrawals
                                 </NavLink>
                             </>
                         }

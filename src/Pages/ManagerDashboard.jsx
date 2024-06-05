@@ -127,7 +127,7 @@ const ManagerDashboard = () => {
                     {/* row 1 */}
                     {
                         requests.map((submission,idx) => {
-                            return (<tr key={submission._id}>
+                            return (<tr key={submission._id} className={`${submission.status === 'approved' ? 'hidden' : submission.status === 'rejected' ? 'hidden' : ''}`}>
                             <th>
                                 {idx+1}
                             </th>
@@ -145,7 +145,7 @@ const ManagerDashboard = () => {
                                 {submission.payable_amount}
                             </td>
                             <td >
-                                <p className={`px-3 py-1 rounded-full  w-fit ${submission.status === 'approved'? 'bg-[rgba(65,221,65,0.438)] text-green-600' : submission.status === 'rejected' ? 'text-red-600 bg-[rgba(223,48,48,0.39)]' : 'bg-[rgba(255,255,0,0.29)] text-yellow-600'}`}>
+                                <p className={`px-3 py-1 rounded-full  w-fit ${submission.status === 'approved'? 'bg-[rgba(65,221,65,0.438)] text-green-600 ' : submission.status === 'rejected' ? 'text-red-600 bg-[rgba(223,48,48,0.39)]' : 'bg-[rgba(255,255,0,0.29)] text-yellow-600'}`}>
                                 {submission.status}
                                 </p>
                                 
