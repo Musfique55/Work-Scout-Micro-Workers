@@ -3,6 +3,7 @@ import Header from "../Components/Header";
 import { useState,useEffect } from "react";
 import useUserInfo from "../Hooks/useUserInfo";
 import { Player } from "@lottiefiles/react-lottie-player";
+import Footer from "../Components/Footer";
 
 const Layout = () => {
     const {userInfo} = useUserInfo();
@@ -31,6 +32,7 @@ const Layout = () => {
         <div>
             <Header></Header>
             <Outlet></Outlet>
+            <Footer></Footer>
         </div>
     );
 };
