@@ -16,6 +16,10 @@ import ManagerDashboard from "../Pages/ManagerDashboard";
 import ErrorPage from "../Pages/ErrorPage";
 import ForbiddenAccess from "../Pages/ForbiddenAccess";
 import Withdrawals from "../Pages/Withdrawals";
+import AdminHome from "../Pages/AdminHome";
+import ManageUsers from "../Pages/ManageUsers";
+import ManageTasks from "../Pages/ManageTasks";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
     // public route
@@ -30,12 +34,25 @@ export const router = createBrowserRouter([
         }
     ]
     },
-
-    // admin route
     {
         path : '/dashboard',
         element : <DashboardLayout></DashboardLayout>,
         children : [
+            // admin route
+            {
+                path : 'admin-home',
+                element : <AdminRoute><AdminHome></AdminHome></AdminRoute>
+            },
+            {
+                path : 'manage-users',
+                element : <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
+            },
+            {
+                path : 'manage-tasks',
+                element : <AdminRoute><ManageTasks></ManageTasks></AdminRoute>
+            },
+
+            // task creator route
             {
                 path : 'manager-home',
                 element : <ManagerDashboard></ManagerDashboard>

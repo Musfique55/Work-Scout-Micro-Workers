@@ -1,7 +1,27 @@
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import { FaFacebook, FaGithub, FaLinkedin } from 'react-icons/fa';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
+import Swal from 'sweetalert2';
 const Footer = () => {
+    const axiosPublic = useAxiosPublic();
+    const handleSubmit = e => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        axiosPublic.post('/subscribers',{email})
+        .then(res => {
+            if(res.data.insertedId){
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "You have subscribed successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                  e.target.reset();
+            }
+        })
+    }
     return (
         <div className='bg-[#E5D5FA] mt-12 rounded-t-[50px]'>
             <div className="flex px-12 justify-between pt-12">
@@ -10,9 +30,9 @@ const Footer = () => {
                     <p className="font-medium text-lg text-[#623f8f]">We Will send you a nice letter no spam</p>
                 </div>
                 <div>
-                    <form>
-                        <input type="text"  placeholder="Enter Your Email" className=" w-[300px] py-3 px-4 rounded-full bg-[#E5D5FA] border-2 border-[#623f8f] focus:outline-none placeholder:text-[#623f8f] placeholder:font-semibold"/>
-                        <button className="font-medium text-lg text-white -ml-10 py-3 px-4 rounded-full bg-[#623f8f]">Subscribe</button>
+                    <form onSubmit={handleSubmit}>
+                        <input type="text" name='email' placeholder="Enter Your Email" className=" w-[300px] py-3 px-4 rounded-full bg-[#E5D5FA] border-2 border-[#623f8f] focus:outline-none placeholder:text-[#623f8f] placeholder:font-semibold"/>
+                        <button type='submit' className="font-medium text-lg text-white -ml-10 py-3 px-4 rounded-full bg-[#623f8f]">Subscribe</button>
                     </form>
                 </div>
             </div>

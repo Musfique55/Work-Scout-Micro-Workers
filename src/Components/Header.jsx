@@ -90,6 +90,13 @@ const Header = () => {
                 
             }
             {
+                (user && userInfo.role === 'admin') &&
+                <NavLink to={`/dashboard/admin-home`}>
+                    Dashboard
+                </NavLink>
+                
+            }
+            {
                 user && 
                 <p>
                     Available Coin(<span className='text-red-500'>{userInfo.coins}</span>)
@@ -125,6 +132,13 @@ const Header = () => {
                 <NavLink to={`/dashboard/manager-home`}>
                     Dashboard
                 </NavLink>
+            }
+            {
+                (user && userInfo.role === 'admin') &&
+                <NavLink to={`/dashboard/admin-home`}>
+                    Dashboard
+                </NavLink>
+                
             }
             {
                 user && 
