@@ -52,7 +52,8 @@ const Addtask = () => {
             task_quantity : parseInt(data.task_quantity),
             dealine : date,
             creator_email : userInfo.email,
-            creator_name : userInfo.displayName
+            creator_name : userInfo.displayName,
+            availability : parseInt(data.task_quantity)
         }
         const {task_quantity,payable_amount} = taskInfo;
         const total = task_quantity * payable_amount;

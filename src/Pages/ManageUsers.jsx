@@ -55,7 +55,8 @@ const ManageUsers = () => {
           }); 
     }
     return (
-        <div>
+        <div className="mt-12 mx-5">
+            <h3 className="text-3xl font-medium mb-8">Manage Users</h3>
             <div className="overflow-x-auto ">
                 <table className="table">
                     {/* head */}

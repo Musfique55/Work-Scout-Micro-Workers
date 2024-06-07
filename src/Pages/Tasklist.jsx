@@ -12,7 +12,7 @@ const Tasklist = () => {
         }
     })
 
-    const filterData = tasks.filter(task => task.task_quantity > 0);
+    const filterData = tasks.filter(task => task.availability > 0);
     return (
         <div className="m-5">
             {

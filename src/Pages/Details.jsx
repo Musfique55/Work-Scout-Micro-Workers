@@ -32,7 +32,7 @@ const renderer = ({days, hours, minutes, seconds, completed }) => {
 
 const Details = () => {
     const data = useLoaderData();
-    const {_id,image,task_title,task_detail,dealine,payable_amount,creator_email,submission_info,task_quantity,creator_name} = data;
+    const {_id,image,task_title,task_detail,dealine,availability,payable_amount,creator_email,submission_info,task_quantity,creator_name} = data;
     const {user} = useAuth();
     const axiosSecure = useAxiosSecure();
     const countDownDate = new Date(dealine);
@@ -45,6 +45,7 @@ const Details = () => {
         const subInfo = {
             task_id : _id,
             task_title : task_title,
+            availability : task_quantity,
             task_detail : task_detail,
             task_img_url : image,
             payable_amount : payable_amount,
@@ -99,7 +100,7 @@ const Details = () => {
                         <p>{creator_email}</p>
                     </div>
                     <div className="mt-5">
-                        <p className="text-gray-700 text-lg">Available: {task_quantity}</p>
+                        <p className="text-gray-700 text-lg">Available: {availability}</p>
                     </div>
                     <div className="mt-5">
                         <p className="text-gray-700 text-sm">Amount</p>
