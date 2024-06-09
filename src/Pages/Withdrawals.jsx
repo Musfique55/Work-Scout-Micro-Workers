@@ -76,7 +76,7 @@ const Withdrawals = () => {
                 </div>   
                 <div className="col-span-1">
                     <label className="block">
-                        Select Platform
+                        Select System
                     </label>
                     <select name="paymentMethod" className="border-2 p-2 w-full focus:outline-none">
                         <option value="bkash">Bkash</option>

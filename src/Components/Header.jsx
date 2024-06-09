@@ -38,8 +38,8 @@ const Header = () => {
     return (
         
 
-        <div className={`h-32 w-full`}>
-            <div className={`hidden lg:flex lg:justify-between fixed w-full z-50 ${scroll > 150 ? 'bg-white text-black shadow-lg' : 'text-black bg-transparent'}`}>
+        <div className={` w-full`}>
+            <div className={`hidden lg:flex lg:justify-between fixed w-full z-50 ${scroll > 150 ? 'bg-white text-black shadow-lg h-32' : 'text-white bg-transparent transition-all'}`}>
                 <div className='flex justify-between flex-1 items-center mx-8 my-12'>
                     <div>
                         <Link to='/'>
