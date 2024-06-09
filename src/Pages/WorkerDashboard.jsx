@@ -8,7 +8,7 @@ import useAuth from "../Hooks/useAuth";
 
 const WorkerDashboard = () => {
     const axiosSecure = useAxiosSecure();
-    const {userInfo} = useUserInfo();
+    const [userInfo] = useUserInfo();
     const {user} = useAuth();
     const [count,setCount] = useState([]);
     const [income,setIncome] = useState([]);
@@ -25,10 +25,10 @@ const WorkerDashboard = () => {
    
     const totalIncome = income.reduce((acc,curr) => acc + curr.payable_amount,0);
     return (
-        <div className="mx-5 my-12">
+        <div className="mx-5 my-7">
             <h3 className="text-5xl font-medium mb-8">Welcome Back</h3>
             <div className="flex gap-6 items-center">
-               <div className="grid grid-cols-3 gap-6">
+               <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
                     <div className="flex items-center gap-5 bg-[#9169c5b0] text-white p-8 rounded-2xl">
                         <FaCoins className="text-3xl"></FaCoins>
                         <div>

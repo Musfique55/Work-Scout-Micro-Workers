@@ -10,7 +10,7 @@ import { Player } from "@lottiefiles/react-lottie-player";
 
 const MyTasks = () => {
     const {user,loading} = useAuth();
-    const {userInfo,refetch} = useUserInfo();
+    const [userInfo,refetch] = useUserInfo();
     const [coins,setCoins] = useState(true);
     const axiosSecure = useAxiosSecure();
     const {data : mytasks = [],refetch :reload} = useQuery({
@@ -74,7 +74,7 @@ const MyTasks = () => {
 
     
     return (
-        <div className="mt-12 px-5">
+        <div className="mt-28 px-5 lg:mt-12">
             <h3 className='my-7 text-3xl font-medium'>My Tasks</h3>
             <div className="overflow-x-auto ">
                 <table className="table">

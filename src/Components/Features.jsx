@@ -8,8 +8,8 @@ const Features = () => {
         <div>
             <div className='mx-12'>
                 <h3 className='text-4xl'>Features</h3>
-                <p className='w-[600px] mt-5'>Access the platform from any device, whether youre on desktop or mobile. Enjoy the flexibility of managing tasks and staying productive on the go.</p>
-                <div className='grid grid-cols-3 gap-6 mt-12'>
+                <p className='lg:w-[600px] mt-5'>Access the platform from any device, whether youre on desktop or mobile. Enjoy the flexibility of managing tasks and staying productive on the go.</p>
+                <div className='grid grid-cols-1 gap-6 mt-12 lg:grid-cols-3'>
                     <div className="flex items-start gap-3">
                         <div className='bg-[#e5d5fa] p-2 rounded-lg'>
                         <SiMoneygram className='text-xl  text-[#8849da]'/>

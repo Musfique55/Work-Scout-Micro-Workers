@@ -20,6 +20,7 @@ import AdminHome from "../Pages/AdminHome";
 import ManageUsers from "../Pages/ManageUsers";
 import ManageTasks from "../Pages/ManageTasks";
 import AdminRoute from "./AdminRoute";
+import ManagerRoute from "./ManagerRoute";
 
 export const router = createBrowserRouter([
     // public route
@@ -55,26 +56,26 @@ export const router = createBrowserRouter([
             // task creator route
             {
                 path : 'manager-home',
-                element : <ManagerDashboard></ManagerDashboard>
+                element : <ManagerRoute><ManagerDashboard></ManagerDashboard></ManagerRoute>
             },
             {
                 path : 'add-tasks',
-                element : <Addtask></Addtask>
+                element : <ManagerRoute><Addtask></Addtask></ManagerRoute>
             },
             {
                 path : 'my-tasks',
-                element : <MyTasks></MyTasks>
+                element : <ManagerRoute><MyTasks></MyTasks></ManagerRoute>
             },
             {
                 path : 'my-tasks/update/:id',
-                element : <Update></Update>,
+                element : <ManagerRoute><Update></Update></ManagerRoute>,
                 loader : ({params}) => fetch(`http://localhost:2000/alltasks/${params.id}`)
             },
             
             //worker routes
             {
                 path : 'worker-home',
-                element : <WorkerDashboard></WorkerDashboard>,
+                element : <PrivateRoute><WorkerDashboard></WorkerDashboard></PrivateRoute>,
             },
             {
                 path : 'task-list',
@@ -91,7 +92,7 @@ export const router = createBrowserRouter([
             },
             {
                 path :'withdrawals',
-                element : <Withdrawals></Withdrawals>
+                element : <PrivateRoute><Withdrawals></Withdrawals></PrivateRoute>
             }
 
         ]

@@ -11,7 +11,7 @@ import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 const DashboardLayout = () => {
     const {user} = useAuth();
-    const {userInfo} = useUserInfo();
+    const [userInfo] = useUserInfo();
     const [menu,setMenu] = useState(false);
     const [rightMenu,setRightMenu] = useState(false)
     const handleMenuToogle = () => {
@@ -35,7 +35,7 @@ const DashboardLayout = () => {
                     {/* desktop menu */}
                     <div className="flex flex-col mt-8 ml-8 space-y-5">
                         {
-                            userInfo.role === 'worker' &&
+                            userInfo?.role === 'worker' &&
                             <>
                                 <NavLink to='/dashboard/worker-home' className='flex items-center gap-4 text-xl font-medium'>
                                     <FaHome></FaHome>
@@ -57,7 +57,7 @@ const DashboardLayout = () => {
                         }
                         
                         {
-                            userInfo.role === 'taskCreator' && 
+                            userInfo?.role === 'taskCreator' && 
                             <>
                                 <NavLink to='/dashboard/manager-home' className='flex items-center gap-4 text-xl font-medium'>
                                     <FaHome></FaHome>
@@ -82,7 +82,7 @@ const DashboardLayout = () => {
                             </>
                         }
                         {
-                            userInfo.role === 'admin' &&
+                            userInfo?.role === 'admin' &&
                             <>
                                 <NavLink to='/dashboard/admin-home' className='flex items-center gap-4 text-xl font-medium'>
                                     <FaHome></FaHome>
@@ -108,14 +108,14 @@ const DashboardLayout = () => {
                     <div className="flex-1 flex items-center justify-end">
                         <div className="flex flex-col gap-3 items-center ">
                             <div className="gap-7 justify-between flex items-center">
-                            <p className="font-medium">Available Coins(<span className="text-red-500 font-medium">{userInfo.coins}</span>)</p>
+                            <p className="font-medium">Available Coins(<span className="text-red-500 font-medium">{userInfo?.coins}</span>)</p>
                             <div className=" rounded-full">
                             <img  src={user?.photoURL} className="w-12 h-12 rounded-full"/>
                             </div>
                             </div>
                             <div className="gap-3 flex items-center">
-                                <p className="bg-[#e5d5fa] px-2 py-1 rounded-full font-medium">{userInfo.role}</p>
-                                <p className="font-medium">{userInfo.name}</p>
+                                <p className="bg-[#e5d5fa] px-2 py-1 rounded-full font-medium">{userInfo?.role}</p>
+                                <p className="font-medium">{userInfo?.name}</p>
                             </div>
                         </div> 
                     <button className="btn btn-ghost btn-circle">
@@ -144,11 +144,11 @@ const DashboardLayout = () => {
                     </div>
                     {/* sidebar */}
                     {/* navigation for individuals */}
-                    {/* desktop menu */}
-                    <div  className={`flex flex-col space-y-5 absolute bg-white p-5 ${!menu ? '-ml-[500px] transition-all' : 'ml-0 mt-44 transition-all '}`}>
+                    {/* mobile menu */}
+                    <div  className={`flex flex-col space-y-5 z-50 absolute bg-white p-5 ${!menu ? '-ml-[500px] transition-all' : 'ml-0 top-2 transition-all h-fit'}`}>
                         <IoClose onClick={() => setMenu(!menu)} className="absolute text-4xl top-3 right-2"/>
                         {
-                            userInfo.role === 'worker' &&
+                            userInfo?.role === 'worker' &&
                             <>
                                 <NavLink to='/dashboard/worker-home' className='flex items-center gap-4 text-xl font-medium'>
                                     <FaHome></FaHome>
@@ -170,7 +170,7 @@ const DashboardLayout = () => {
                         }
                         
                         {
-                            userInfo.role === 'taskCreator' && 
+                            userInfo?.role === 'taskCreator' && 
                             <>
                                 <NavLink to='/dashboard/manager-home' className='flex items-center gap-4 text-xl font-medium'>
                                     <FaHome></FaHome>
@@ -195,7 +195,7 @@ const DashboardLayout = () => {
                             </>
                         }
                         {
-                            userInfo.role === 'admin' &&
+                            userInfo?.role === 'admin' &&
                             <>
                                 <NavLink to='/dashboard/admin-home' className='flex items-center gap-4 text-xl font-medium'>
                                     <FaHome></FaHome>
@@ -227,10 +227,12 @@ const DashboardLayout = () => {
                             <div className="rounded-full ">
                             <img  src={user?.photoURL} onClick={() => handleRightMenu()} className="w-12 h-12 rounded-full cursor-pointer"/>
                             </div>
-                            <div className={`bg-white space-y-3 absolute  ${rightMenu ? 'right-2' : '-right-[18rem]'}`}>
-                                <p className="font-medium">Available Coins(<span className="text-red-500 font-medium">{userInfo.coins}</span>)</p>
-                                <p className="bg-[#e5d5fa] px-2 py-1 rounded-full font-medium">{userInfo.role}</p>
-                                <p className="font-medium">{userInfo.name}</p>
+                            <div className={`bg-white absolute  ${rightMenu ? 'mt-2 right-2 transition-all' : '-mt-[500px] right-2 transition-all'}`}>
+                                <div className="bg-white p-5 space-y-3 h-fit text-center z-50">
+                                    <p className="font-medium">Available Coins(<span className="text-red-500 font-medium">{userInfo?.coins}</span>)</p>
+                                    <p className="bg-[#e5d5fa] px-2 py-1 rounded-full font-medium">{userInfo?.role}</p>
+                                    <p className="font-medium">{userInfo?.name}</p>
+                                </div>
                             </div>
                             </div>
                         </div> 

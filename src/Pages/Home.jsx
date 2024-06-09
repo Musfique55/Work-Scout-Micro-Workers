@@ -15,6 +15,7 @@ import Teestimonials from '../Components/Teestimonials';
 import TopEarners from '../Components/TopEarners';
 // import { EffectFade, Navigation, Pagination } from 'swiper/modules';
 const Home = () => {
+
     return (
         <div>
            {/* <>

@@ -20,9 +20,7 @@ const useAxiosSecure = () => {
         return response;
     },async(error) => {
         const status = error.response.status;
-        if(status === 403){
-            return navigate('/forbidden');
-        }
+       
         if(status === 400 || status === 401){
             await logout();
             navigate('/login');

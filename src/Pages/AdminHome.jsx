@@ -22,7 +22,7 @@ const AdminHome = () => {
     return (
         <div className="mx-5 mt-12">
             <div className="grid-cols-1 grid gap-10 lg:grid-cols-3">
-            <div className="flex items-center gap-5 bg-[#9169c5b0] text-white p-8 rounded-2xl">
+                    <div className="flex items-center gap-5 bg-[#9169c5b0] text-white p-8 rounded-2xl">
                         <FaUsers className="text-3xl"></FaUsers>
                         <div>
                            <p className="text-4xl font-medium">{users.length}</p>     
@@ -44,6 +44,7 @@ const AdminHome = () => {
                         </div>
                     </div>
             </div>
+            <h3 className="text-3xl font-medium mt-8">Withdraw Requests</h3>
         </div>
     );
 };

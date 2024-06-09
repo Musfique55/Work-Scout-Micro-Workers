@@ -11,7 +11,7 @@ const ManagerDashboard = () => {
     const axiosSecure = useAxiosSecure();
     const {user} = useAuth();
     const [myTask,setMyTasks] = useState([]);
-    const {userInfo} = useUserInfo();
+    const [userInfo] = useUserInfo();
     const {data : requests = [],refetch} = useQuery({
         queryKey : ['requests',userInfo.email],
         queryFn : async () => {
@@ -76,13 +76,13 @@ const ManagerDashboard = () => {
         })
     }
 
-    const remainingTasks = myTask.reduce((acc,curr) => acc + curr.task_quantity,0);
+    const remainingTasks = myTask.reduce((acc,curr) => acc + curr.availability,0);
     return (
         <div className="mt-12 mx-5">
 
             <h3 className="text-5xl font-medium mb-8">Welcome Back</h3>
             <div className="flex gap-6 items-center">
-               <div className="grid grid-cols-3 gap-14">
+               <div className="grid grid-cols-1 gap-14 lg:grid-cols-3">
                     <div className="flex items-center gap-5 bg-[#9169c5b0] text-white p-8 rounded-2xl">
                         <FaCoins className="text-3xl"></FaCoins>
                         <div>
@@ -106,8 +106,10 @@ const ManagerDashboard = () => {
                     </div>
                </div>
             </div>
-            <h3 className="text-3xl font-semibold my-8">Submission Requests</h3>
-            <div className="overflow-x-auto">
+            {
+                (requests) && <div>
+                    <h3 className="text-3xl font-semibold my-8">Submission Requests</h3>
+                <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
                     <thead className="text-base">
@@ -125,7 +127,7 @@ const ManagerDashboard = () => {
                     </thead>
                     <tbody>
                     {/* row 1 */}
-                    {
+                    {   
                         requests.map((submission,idx) => {
                             return (<tr key={submission._id} className={`${submission.status === 'approved' ? 'hidden' : submission.status === 'rejected' ? 'hidden' : ''}`}>
                             <th>
@@ -165,6 +167,8 @@ const ManagerDashboard = () => {
                   
                 </table>
             </div>
+                </div>
+            }
         </div>
     );
 };

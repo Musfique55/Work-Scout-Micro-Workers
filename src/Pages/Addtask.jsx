@@ -8,7 +8,7 @@ import useUserInfo from "../Hooks/useUserInfo";
 const Addtask = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [coins,setCoins] = useState(true);
-    const {userInfo,refetch} = useUserInfo();
+    const [userInfo,refetch] = useUserInfo();
     const axiosPublic = useAxiosPublic();
     const imageHost = import.meta.env.VITE_IMAGE_HOSTING;
     const hostingUrl = `https://api.imgbb.com/1/upload?key=${imageHost}`;
@@ -128,13 +128,13 @@ const Addtask = () => {
                         <textarea rows={10} {...register("task_details",{required:true})} placeholder='Task Details' className='border-2 mt-2 p-2 focus:outline-none'/>
                         {errors.task_details && <p className='text-red-500'>This field must be fill</p>}
                     </div>
-                    <div className='flex flex-col'>
+                    <div className='flex flex-col col-span-2  lg:col-span-1'>
                         <label >
                         Completion Date
                         </label>
                         <ReactDatePicker selected={startDate} onChange={(date) => setStartDate(date)} className='border-2 mt-2 p-2 focus:outline-none'/>
                     </div>
-                    <div className='flex flex-col w-fit'>
+                    <div className='flex flex-col  col-span-2  lg:col-span-1 '>
                         <label>
                             Upload Image
                         </label>

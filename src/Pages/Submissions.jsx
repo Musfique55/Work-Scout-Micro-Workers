@@ -13,7 +13,8 @@ const Submissions = () => {
         }
     })
     return (
-        <div className="mt-12">
+        <div className="mt-32 mx-5 lg:12">
+            <h3 className='my-7 text-3xl font-medium'>My Submissions</h3>
             <div className="overflow-x-auto mb-5">
                 <table className="table">
                     {/* head */}

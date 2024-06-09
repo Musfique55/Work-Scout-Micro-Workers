@@ -2,8 +2,10 @@ import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from 'prop-types';
 import useAuth from "../Hooks/useAuth";
 import { Player } from "@lottiefiles/react-lottie-player";
+import useWorker from "../Hooks/useWorker";
 const PrivateRoute = ({children}) => {
     const {user,loading} = useAuth();
+    const [isWorker,isFetching] = useWorker();
     const location = useLocation();
     const loader =
     <Player
@@ -13,14 +15,14 @@ const PrivateRoute = ({children}) => {
     style={{ height: '300px', width: '300px', marginLeft : 'auto',marginRight : 'auto'}}
     >
     </Player>
-    if(loading){
+    if(loading || isFetching){
         return loader;
     }
 
-    if(user){
+    if(user && isWorker){
         return children;
     }
-    return <Navigate to='/' state={location.pathname}></Navigate>
+    return <Navigate to='/forbidden' state={location.pathname}></Navigate>
 };
 
 PrivateRoute.propTypes = {

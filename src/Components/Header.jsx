@@ -1,15 +1,16 @@
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../assets/logo.png';
-import { FaUnlock } from 'react-icons/fa';
-import { FaCirclePlus } from 'react-icons/fa6';
 import { useEffect, useState } from 'react';
 import useAuth from '../Hooks/useAuth';
 import useUserInfo from '../Hooks/useUserInfo';
-import { Player } from '@lottiefiles/react-lottie-player';
+import { CgMenuLeft } from 'react-icons/cg';
+import { IoClose } from 'react-icons/io5';
+import { FaCirclePlus, FaUnlock } from 'react-icons/fa6';
 const Header = () => {
-    const {userInfo} = useUserInfo();
-    const [findUser,setFindUser] = useState(true);
+    const [userInfo] = useUserInfo();
     const {user,logout} = useAuth();
+    const [menu,setMenu] = useState(false);
+    const [rightMenu,setRightMenu] = useState(false)
     const [scroll,setScroll] = useState(0);
     useEffect(() => {
         const handleScroll = () => {
@@ -18,172 +19,192 @@ const Header = () => {
         window.addEventListener('scroll',handleScroll);      
     },[scroll]);
 
-    const loader =
-    <Player
-    autoplay
-    loop
-    src="https://lottie.host/47e12094-cada-45be-b9f0-47a35c570531/Xz6EddocLm.json"
-    style={{ height: '300px', width: '300px', marginLeft : 'auto',marginRight : 'auto'}}
-    >
-    </Player>
     
-    useEffect(() => {
-        if(userInfo){
-            setFindUser(false);
-        }else{
-            setFindUser(true);
-        }
-    },[userInfo])
 
-    if(findUser){
-        return loader;
-    }
 
     const handleLogout = async () => {
         await logout();
     }
 
+   
+    const handleMenuToogle = () => {
+        setMenu(!menu);
+    }
+
+    const handleRightMenu = () => {
+        setRightMenu(!rightMenu)
+    }
+
     return (
-        <div className='h-32'>
-            <div id='header' className={`navbar p-0 flex justify-between items-center px-12 py-8  fixed w-full z-50 ${scroll > 150 ? 'bg-white text-black shadow-lg' : 'text-black bg-transparent'}`}>
-        <div className="flex gap-6 flex-1  lg:flex-none lg:justify-start">
-          <div className="dropdown">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost pl-0 lg:hidden"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
+        
+
+        <div className={`h-32 w-full`}>
+            <div className={`hidden lg:flex lg:justify-between fixed w-full z-50 ${scroll > 150 ? 'bg-white text-black shadow-lg' : 'text-black bg-transparent'}`}>
+                <div className='flex justify-between flex-1 items-center mx-8 my-12'>
+                    <div>
+                        <Link to='/'>
+                        <img src={logo} alt="" className='w-[193px] h-[40px] cursor-pointer'/>
+                        </Link>
+                    </div>
+                    {/* desktop menu */}
+                    <div className="flex gap-6">
+                        {
+                            !user && <NavLink to='https://www.youtube.com/watch?v=PFkzyLHiEPw&embeds_referring_euri=https%3A%2F%2Fworkscout.in%2F&source_ve_path=Mjg2NjQsMjg2NjY&feature=emb_logo'>
+                            Watch Demo
+                        </NavLink>
+                        }
+                        {
+                            (user && userInfo?.role === 'worker') &&
+                            <NavLink to={`/dashboard/worker-home`}>
+                                Dashboard
+                            </NavLink>
+                            
+                        }
+                        {
+                            (user && userInfo?.role === 'taskCreator') &&
+                            <NavLink to={`/dashboard/manager-home`}>
+                                Dashboard
+                            </NavLink>
+                            
+                        }
+                        {
+                            (user && userInfo?.role === 'admin') &&
+                            <NavLink to={`/dashboard/admin-home`}>
+                                Dashboard
+                            </NavLink>
+                            
+                        }
+                        {
+                            user && 
+                            <p>
+                                Available Coin(<span className='text-red-500'>{userInfo?.coins}</span>)
+                            </p> 
+                        }
+                        {
+                            user && <NavLink to=''>
+                            Profile
+                        </NavLink>
+                        }
+                    
+                    </div>
+                    
+                    {
+                        user ? <div className='flex gap-3 items-center'>
+                        <p className="font-medium">{userInfo?.name}</p>
+                        <img  src={user?.photoURL} onClick={() => handleRightMenu()} className="w-12 h-12 rounded-full cursor-pointer"/>
+                        <i
+                         onClick={handleLogout}
+                         className="fa-solid fa-right-from-bracket text-2xl cursor-pointer"
+                         style={{ color: "black" }}
+                         ></i>
+                       
+                         </div>
+                        : <div className='flex items-center gap-3'> 
+                            <NavLink to='/login' className="hover:text-[rgb(38,174,97)] flex items-center gap-3 font-base font-medium">
+                            <FaUnlock></FaUnlock>
+                            Login
+                            </NavLink>
+                        <NavLink to='/register' className="hover:text-[rgb(38,174,97)] flex items-center gap-3 font-base font-medium">
+                            <FaCirclePlus />
+                            Register
+                        </NavLink> 
+                            </div>
+                    }
+                </div>
+               
             </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3  p-2 shadow bg-base-100 rounded-box w-52 z-50"
-            >
-             <NavLink to='https://www.youtube.com/watch?v=PFkzyLHiEPw&embeds_referring_euri=https%3A%2F%2Fworkscout.in%2F&source_ve_path=Mjg2NjQsMjg2NjY&feature=emb_logo'>
-                Watch Demo
-            </NavLink>
-            {
-                (user && userInfo.role === 'worker') &&
-                <NavLink to={`/dashboard/worker-home`}>
-                    Dashboard
-                </NavLink>
-                
-            }
-            {
-                (user && userInfo.role === 'taskCreator') &&
-                <NavLink to={`/dashboard/manager-home`}>
-                    Dashboard
-                </NavLink>
-                
-            }
-            {
-                (user && userInfo.role === 'admin') &&
-                <NavLink to={`/dashboard/admin-home`}>
-                    Dashboard
-                </NavLink>
-                
-            }
-            {
-                user && 
-                <p>
-                    Available Coin(<span className='text-red-500'>{userInfo.coins}</span>)
-                </p> 
-            }
-            {
-                user && 
-                <NavLink to=''>
-                    Profile
-                </NavLink>
-            }
-            </ul>
-          </div>        
-            <Link to='/'>
-              <img src={logo} alt="" className='w-[193px] h-[40px] cursor-pointer'/>
-            </Link>
-        </div>
 
 
-        <div className=" hidden  lg:flex lg:flex-1 lg:justify-center lg:items-center">
-          <ul className="flex items-center justify-center flex-1 gap-4 text-base menu menu-horizontal px-1">
-            <NavLink to='https://www.youtube.com/watch?v=PFkzyLHiEPw&embeds_referring_euri=https%3A%2F%2Fworkscout.in%2F&source_ve_path=Mjg2NjQsMjg2NjY&feature=emb_logo'>
-                Watch Demo
-            </NavLink>
-            {
-                (user && userInfo.role === 'worker') &&
-                <NavLink to={`/dashboard/worker-home`}>
-                    Dashboard
-                </NavLink>
-            }
-            {
-                (user && userInfo.role === 'taskCreator') &&
-                <NavLink to={`/dashboard/manager-home`}>
-                    Dashboard
-                </NavLink>
-            }
-            {
-                (user && userInfo.role === 'admin') &&
-                <NavLink to={`/dashboard/admin-home`}>
-                    Dashboard
-                </NavLink>
-                
-            }
-            {
-                user && 
-                <p>
-                    Available Coin(<span className='text-red-500'>{userInfo.coins}</span>)
-                </p> 
-            }
-            {
-                user && 
-                <NavLink to='/dashboard'>
-                    Profile
-                </NavLink>
-            }
-            
-          </ul>     
-        </div>
-        {user ? (
-          <div className="hidden md:flex lg:flex gap-3 items-center">
-            <div className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img src={user?.photoURL} />
-              </div>
+            <div className="flex flex-col lg:hidden">
+                <div className={`flex gap-5 py-8 px-5 items-center fixed w-full z-50 ${scroll > 150 ? 'bg-white text-black shadow-lg' : 'text-black bg-transparent'}`}>
+
+                    <div className=" flex items-center gap-5">
+                    
+                        <CgMenuLeft onClick={() => handleMenuToogle()} className="text-4xl"/>
+                        <Link to='/'>
+                        <img src={logo} alt="" className='w-[193px] h-[40px] cursor-pointer'/>
+                        </Link>
+                    </div>
+                 
+                    {/* mobile menu */}
+                    <div  className={`flex flex-col space-y-5 absolute bg-white p-5 ${!menu ? '-ml-[500px] transition-all' : 'ml-0 mt-36 transition-all h-fit'}`}>
+                        <IoClose onClick={() => setMenu(!menu)} className="absolute text-4xl top-3 right-2"/>
+                        
+                        {!user && <NavLink to='https://www.youtube.com/watch?v=PFkzyLHiEPw&embeds_referring_euri=https%3A%2F%2Fworkscout.in%2F&source_ve_path=Mjg2NjQsMjg2NjY&feature=emb_logo'>
+                         Watch Demo
+                        </NavLink>
+                        }
+                    {
+                        (user && userInfo?.role === 'worker') &&
+                        <NavLink to={`/dashboard/worker-home`}>
+                            Dashboard
+                        </NavLink>
+                        
+                    }
+                    {
+                        (user && userInfo?.role === 'taskCreator') &&
+                        <NavLink to={`/dashboard/manager-home`}>
+                            Dashboard
+                        </NavLink>
+                        
+                    }
+                    {
+                        (user && userInfo?.role === 'admin') &&
+                        <NavLink to={`/dashboard/admin-home`}>
+                            Dashboard
+                        </NavLink>
+                        
+                    }
+                    {
+                        user && 
+                        <p>
+                            Available Coin(<span className='text-red-500'>{userInfo?.coins}</span>)
+                        </p> 
+                    }
+                    {
+                        user && 
+                        <NavLink to=''>
+                            Profile
+                        </NavLink>
+                    }
+                    </div>
+                    <div> 
+                    <div className="flex items-center justify-end">
+                        <div className="flex flex-col gap-3 items-center relative">
+                            <div>
+                            
+                            {
+                                user ? <div>
+                                    <div className="rounded-full ">
+                                <img  src={user?.photoURL} onClick={() => handleRightMenu()} className="w-12 h-12 rounded-full cursor-pointer"/>
+                                </div>
+                                <div className={`bg-white absolute  ${rightMenu ? 'mt-2 right-2 transition-all' : '-mt-[500px] right-1 transition-all'}`}>
+                                <div className="bg-white p-5 space-y-3 h-fit text-center z-50">
+                                    <p className="font-medium">{userInfo?.name}</p>
+                                    <p className="bg-[#e5d5fa] px-2 py-1 rounded-full font-medium">{userInfo?.role}</p>
+                                    <button  onClick={handleLogout}>Logout</button>
+                                </div>
+                            </div>
+                                </div> :
+                                <div className='flex flex-col items-center gap-3 lg:flex-row'> 
+                                        <NavLink to='/login' className="hover:text-[rgb(38,174,97)] flex items-center gap-3 font-base font-medium">
+                                        <FaUnlock></FaUnlock>
+                                        Login
+                                        </NavLink>
+                                    <NavLink to='/register' className="hover:text-[rgb(38,174,97)] flex items-center gap-3 font-base font-medium">
+                                        <FaCirclePlus />
+                                        Register
+                                    </NavLink> 
+                                </div>
+                            }
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                </div>
             </div>
-            <p className="text-black">{user?.displayName}</p>
-            <i
-              onClick={handleLogout}
-              className="fa-solid fa-right-from-bracket text-2xl cursor-pointer"
-              style={{ color: "black" }}
-            ></i>
-          </div>
-        ) : (
-          
-            <div className='flex items-center gap-3'> 
-                <NavLink to='/login' className="hover:text-[rgb(38,174,97)] flex items-center gap-3 font-base font-medium">
-                    <FaUnlock></FaUnlock>
-                    Login
-                </NavLink>
-                <NavLink to='/register' className="hover:text-[rgb(38,174,97)] flex items-center gap-3 font-base font-medium">
-                    <FaCirclePlus />
-                    Register
-                </NavLink> 
-            </div>
             
-        )}
-      </div>
+
         </div>
     );
 };

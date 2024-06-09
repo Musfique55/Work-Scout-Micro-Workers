@@ -67,7 +67,7 @@ const Login = () => {
         })
       }
     return (
-        <div className="flex  m-12 gap-10">
+        <div className="flex flex-col  m-12 gap-10 lg:flex-row">
             <div className='flex flex-1'>
                 <img src={reg} alt="" className='h-[450px] w-full object-cover'/>
             </div>

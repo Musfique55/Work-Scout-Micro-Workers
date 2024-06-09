@@ -61,7 +61,7 @@ const ManageTasks = () => {
     }
 
     return (
-        <div className="mt-12 mx-5">
+        <div className="mt-24 mx-5 lg:mt-12">
             <h3 className="text-3xl font-medium mb-8">Manage Tasks</h3>
             <table className="table">
                     {/* head */}

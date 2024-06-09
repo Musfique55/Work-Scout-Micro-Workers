@@ -1,10 +1,10 @@
 import { Player } from "@lottiefiles/react-lottie-player";
-import useAdmin from "../Hooks/useAdmin";
 import useAuth from "../Hooks/useAuth";
-import PropTypes from 'prop-types';
+import useManager from "../Hooks/useManager";
 import { Navigate, useLocation } from "react-router-dom";
-const AdminRoute = ({children}) => {
-    const [isAdmin,isPending] = useAdmin();
+import PropTypes from 'prop-types';
+const ManagerRoute = ({children}) => {
+    const [isTaskCreator,isLoading] = useManager();
     const {user,loading} = useAuth();
     const location = useLocation();
     const loader =
@@ -16,19 +16,16 @@ const AdminRoute = ({children}) => {
     >
     </Player>
 
-    if(loading || isPending){
+    if(loading || isLoading){
         return loader;
     }
-
-    if(user && isAdmin){
+    if(user && isTaskCreator){
         return children;
     }
-    
     return <Navigate to="/forbidden" state={location.pathname}></Navigate>
 };
 
-
-AdminRoute.propTypes = {
+ManagerRoute.propTypes = {
     children : PropTypes.node
 }
-export default AdminRoute;
+export default ManagerRoute;
