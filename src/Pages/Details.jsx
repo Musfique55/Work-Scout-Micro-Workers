@@ -37,7 +37,6 @@ const Details = () => {
     const axiosSecure = useAxiosSecure();
     const countDownDate = new Date(dealine);
     const deadlineDate = countDownDate.getTime();
-    console.log(countDownDate);
     const handleSubmit = e => {
         e.preventDefault();
         const date = new Date().toDateString();

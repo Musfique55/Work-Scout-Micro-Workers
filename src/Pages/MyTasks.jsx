@@ -43,7 +43,6 @@ const MyTasks = () => {
         return loader
     }
 
-   console.log(mytasks);
 
     const handleDelete =(id) => {
         Swal.fire({
@@ -121,9 +120,6 @@ const MyTasks = () => {
                     </tbody>
                 </table>
             </div>
-            {/* You can open the modal using document.getElementById('ID').showModal() method */}
-            {/* <button className="btn" >open modal</button> */}
-            
         </div>
     )
 };

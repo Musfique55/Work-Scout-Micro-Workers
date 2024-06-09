@@ -32,7 +32,7 @@ const WorkerDashboard = () => {
                     <div className="flex items-center gap-5 bg-[#9169c5b0] text-white p-8 rounded-2xl">
                         <FaCoins className="text-3xl"></FaCoins>
                         <div>
-                           <p className="text-4xl font-medium">{userInfo.coins}</p>     
+                           <p className="text-4xl font-medium">{userInfo?.coins}</p>     
                            <h5 className="text-2xl font-medium">Available Coins</h5>         
                         </div>
                     </div>

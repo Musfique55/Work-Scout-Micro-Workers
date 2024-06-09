@@ -17,7 +17,6 @@ const Update = () => {
             submission_info : subInfo
         }
         const res = await axiosSecure.patch(`/alltasks/${_id}`,update)
-        console.log(res.data);
         if(res.data.modifiedCount > 0){
             Swal.fire({
                 position: "center",

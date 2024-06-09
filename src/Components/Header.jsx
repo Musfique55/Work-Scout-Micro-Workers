@@ -1,5 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../assets/logo.png';
+import logo2 from '../assets/logo2.png';
 import { useEffect, useState } from 'react';
 import useAuth from '../Hooks/useAuth';
 import useUserInfo from '../Hooks/useUserInfo';
@@ -43,7 +44,7 @@ const Header = () => {
                 <div className='flex justify-between flex-1 items-center mx-8 my-12'>
                     <div>
                         <Link to='/'>
-                        <img src={logo} alt="" className='w-[193px] h-[40px] cursor-pointer'/>
+                        <img src={scroll > 150 ? logo : logo2} alt="" className='w-[193px] h-[40px] cursor-pointer'/>
                         </Link>
                     </div>
                     {/* desktop menu */}
@@ -94,8 +95,7 @@ const Header = () => {
                         <img  src={user?.photoURL} onClick={() => handleRightMenu()} className="w-12 h-12 rounded-full cursor-pointer"/>
                         <i
                          onClick={handleLogout}
-                         className="fa-solid fa-right-from-bracket text-2xl cursor-pointer"
-                         style={{ color: "black" }}
+                         className={`fa-solid fa-right-from-bracket text-2xl cursor-pointer ${scroll > 150 ? 'text-black' : 'text-white'}`}
                          ></i>
                        
                          </div>
@@ -119,10 +119,9 @@ const Header = () => {
                 <div className={`flex gap-5 py-8 px-5 items-center fixed w-full z-50 ${scroll > 150 ? 'bg-white text-black shadow-lg' : 'text-black bg-transparent'}`}>
 
                     <div className=" flex items-center gap-5">
-                    
                         <CgMenuLeft onClick={() => handleMenuToogle()} className="text-4xl"/>
                         <Link to='/'>
-                        <img src={logo} alt="" className='w-[193px] h-[40px] cursor-pointer'/>
+                        <img src={scroll > 150 ? logo : logo2} alt="logo" className='w-[193px] h-[40px] cursor-pointer'/>
                         </Link>
                     </div>
                  

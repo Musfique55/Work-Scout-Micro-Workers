@@ -36,7 +36,7 @@ const Home = () => {
                     <img src={slide1} className='block h-[500px] absolute bottom-0 right-0 object-cover'/>
                 </SwiperSlide>
                 <SwiperSlide className='slider bg-[#AA495D] relative'>
-                <img src={slide2} className='block h-[500px] lg:h-[600px] absolute bottom-0 right-0 object-cover'/>
+                <img src={slide2} className='block h-[500px]  absolute bottom-0 right-0 object-cover'/>
                 </SwiperSlide>
                 <SwiperSlide className='slider bg-[#5E1528] relative'>
                 <img src={slide3} className='block h-[400px]  absolute bottom-0 right-0 object-cover'/>
