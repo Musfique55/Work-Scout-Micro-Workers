@@ -1,6 +1,13 @@
-# React + Vite
+# Work Scout Website
+# Live Link : https://work-scout-3a179.web.app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Admin Login Info
+# Email : admin@gmail.com
+# Password : Admincheck#
+
+# Features of the website
+  
+
 
 Currently, two official plugins are available:
 
