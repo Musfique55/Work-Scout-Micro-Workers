@@ -11,51 +11,51 @@
    Users are assigned roles: Worker, Task-Creator, or Admin.
    Different dashboards and functionalities based on user roles.
 
--Responsive Design:
+- Responsive Design:
   The platform is responsive for mobile, tablet, and desktop views.
   Dashboard is also made responsive.
 
--User Authentication:
- Secure user registration and login using JWT.
- Email and Google login options.
+- User Authentication:
+  Secure user registration and login using JWT.
+  Email and Google login options.
 
--Navbar and Footer:
- Navbar with dynamic navigation options based on user login status.
- Footer with website logo and clickable social media icons.
+- Navbar and Footer:
+  Navbar with dynamic navigation options based on user login status.
+  Footer with website logo and clickable social media icons.
 
--Home Page:
- Hero section with a slider.
- Features section highlighting key platform features.
- How It Works section with steps to use the platform.
- Top Earners section showing top workers.
- Testimonial section with user feedback in a slider format.
+- Home Page:
+  Hero section with a slider.
+  Features section highlighting key platform features.
+  How It Works section with steps to use the platform.
+  Top Earners section showing top workers.
+  Testimonial section with user feedback in a slider format.
 
--Task Management for Workers:
- View available tasks with detailed descriptions.
- Submit completed tasks for review.
- Withdraw coins earned by completing tasks.
- Receive notifications about earnings and withdrawals.
+- Task Management for Workers:
+  View available tasks with detailed descriptions.
+  Submit completed tasks for review.
+  Withdraw coins earned by completing tasks.
+  Receive notifications about earnings and withdrawals.
 
--Task Management for Task-Creators:
- Create tasks with specific instructions, deadlines, and reward amounts.
- Review task submissions and approve or reject them.
- Pay workers for completed tasks using platform coins.
- Purchase coins to facilitate task payments.
- Report workers to Admin for issues.
+- Task Management for Task-Creators:
+  Create tasks with specific instructions, deadlines, and reward amounts.
+  Review task submissions and approve or reject them.
+  Pay workers for completed tasks using platform coins.
+  Purchase coins to facilitate task payments.
+  Report workers to Admin for issues.
 
--Admin Dashboard:
- Modify user roles and address reported issues.
- Manage platform integrity by deleting tasks and users.
- View and handle withdrawal requests from users.
-Payment and Withdrawal System:
+- Admin Dashboard:
+  Modify user roles and address reported issues.
+  Manage platform integrity by deleting tasks and users.
+  View and handle withdrawal requests from users.
 
--Workers can withdraw coins for real money.
- Task-Creators can purchase coins using Stripe.
- Payment history tracking for Task-Creators.
+- Payment and Withdrawal System:
+  Workers can withdraw coins for real money.
+  Task-Creators can purchase coins using Stripe.
+  Payment history tracking for Task-Creators.
 
--Notification System:
- Users receive notifications for various actions (e.g., task approval, earnings).
- Notifications are stored and displayed in descending order based on time.
+- Notification System:
+  Users receive notifications for various actions (e.g., task approval, earnings).
+  Notifications are stored and displayed in descending order based on time.
 
 # Packages-
 
