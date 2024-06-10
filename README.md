@@ -59,15 +59,15 @@
 
 # Packages-
 
--React
--React Router
--React Hook Form
--Swiper js
--React Icons
--React Countdown
--React DatePicker
--Firebase
--Tanstack Query
--Axios
--Sweet Alert
+- React
+- React Router
+- React Hook Form
+- Swiper js
+- React Icons
+- React Countdown
+- React DatePicker
+- Firebase
+- Tanstack Query
+- Axios
+- Sweet Alert
 
