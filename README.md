@@ -8,56 +8,66 @@
 # Features of the website
  
 - Role-Based Access Control:
+   Users are assigned roles: Worker, Task-Creator, or Admin.
+   Different dashboards and functionalities based on user roles.
 
-Users are assigned roles: Worker, Task-Creator, or Admin.
-Different dashboards and functionalities based on user roles.
-Responsive Design:
+-Responsive Design:
+  The platform is responsive for mobile, tablet, and desktop views.
+  Dashboard is also made responsive.
 
-The platform is responsive for mobile, tablet, and desktop views.
-Dashboard is also made responsive.
-User Authentication:
+-User Authentication:
+ Secure user registration and login using JWT.
+ Email and Google login options.
 
-Secure user registration and login using JWT.
-Email and Google login options.
-Environment variables used to hide Firebase config keys and MongoDB credentials.
-Navbar and Footer:
+-Navbar and Footer:
+ Navbar with dynamic navigation options based on user login status.
+ Footer with website logo and clickable social media icons.
 
-Navbar with dynamic navigation options based on user login status.
-Footer with website logo and clickable social media icons.
-Home Page:
+-Home Page:
+ Hero section with a slider.
+ Features section highlighting key platform features.
+ How It Works section with steps to use the platform.
+ Top Earners section showing top workers.
+ Testimonial section with user feedback in a slider format.
 
-Hero section with a slider or background video.
-Features section highlighting key platform features.
-How It Works section with steps to use the platform.
-Top Earners section showing top workers.
-Testimonial section with user feedback in a slider format.
-Task Management for Workers:
+-Task Management for Workers:
+ View available tasks with detailed descriptions.
+ Submit completed tasks for review.
+ Withdraw coins earned by completing tasks.
+ Receive notifications about earnings and withdrawals.
 
-View available tasks with detailed descriptions.
-Submit completed tasks for review.
-Withdraw coins earned by completing tasks.
-Receive notifications about earnings and withdrawals.
-Task Management for Task-Creators:
+-Task Management for Task-Creators:
+ Create tasks with specific instructions, deadlines, and reward amounts.
+ Review task submissions and approve or reject them.
+ Pay workers for completed tasks using platform coins.
+ Purchase coins to facilitate task payments.
+ Report workers to Admin for issues.
 
-Create tasks with specific instructions, deadlines, and reward amounts.
-Review task submissions and approve or reject them.
-Pay workers for completed tasks using platform coins.
-Purchase coins to facilitate task payments.
-Report workers to Admin for issues.
-Admin Dashboard:
-
-Modify user roles and address reported issues.
-Manage platform integrity by deleting tasks and users.
-View and handle withdrawal requests from users.
+-Admin Dashboard:
+ Modify user roles and address reported issues.
+ Manage platform integrity by deleting tasks and users.
+ View and handle withdrawal requests from users.
 Payment and Withdrawal System:
 
-Workers can withdraw coins for real money.
-Task-Creators can purchase coins using Stripe.
-Payment history tracking for Task-Creators.
-Notification System:
+-Workers can withdraw coins for real money.
+ Task-Creators can purchase coins using Stripe.
+ Payment history tracking for Task-Creators.
 
-Users receive notifications for various actions (e.g., task approval, earnings).
-Notifications are stored and displayed in descending order based on time.
+-Notification System:
+ Users receive notifications for various actions (e.g., task approval, earnings).
+ Notifications are stored and displayed in descending order based on time.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Packages-
+
+-React
+-React Router
+-React Hook Form
+-Swiper js
+-React Icons
+-React Countdown
+-React DatePicker
+-Firebase
+-Tanstack Query
+-Axios
+-Sweet Alert
+
