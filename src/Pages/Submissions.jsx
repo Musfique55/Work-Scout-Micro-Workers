@@ -1,17 +1,31 @@
-import { useQuery } from "@tanstack/react-query";
 import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { useEffect, useState } from "react";
+import useSubmissions from "../Hooks/useSubmissions";
 
 const Submissions = () => {
     const {user} = useAuth(); 
     const axiosSecure = useAxiosSecure();
-    const {data : submissions = []} = useQuery({
-        queryKey : ['submissions',user?.email],
-        queryFn :  async() => {
-            const res =  await axiosSecure.get(`/submissions/${user?.email}`);
-            return res.data
-        }
-    })
+    const [currentPage,setCurrentPage] = useState(1);
+    const [submissions,setSubmissions] = useState([]);
+    const [count] = useSubmissions();
+    const limit = 10; 
+    
+
+    useEffect(() => {
+        axiosSecure.get(`/submissions/${user?.email}?page=${currentPage}&limit=${limit}`)
+        .then(res => {
+            setSubmissions(res.data)
+        })
+    },[axiosSecure,currentPage,limit,user.email])
+
+    
+    const totalPages = Math.ceil(count / limit);
+    const pages = [];
+    for(let i = 0; i < totalPages ; i++){
+        pages.push(i+1);
+    }
+    
     return (
         <div className="mt-32 mx-5 lg:12">
             <h3 className='my-7 text-3xl font-medium'>My Submissions</h3>
@@ -33,7 +47,7 @@ const Submissions = () => {
                     <tbody>
                     {/* row 1 */}
                     {
-                        submissions.map((submission,idx) => {
+                        submissions?.map((submission,idx) => {
                             return (<tr key={submission._id}>
                             <th>
                                 {idx+1}
@@ -67,8 +81,17 @@ const Submissions = () => {
                     }
                     
                     </tbody>
-                  
+                   
                 </table>
+                <div className="flex justify-center gap-3 mt-10">
+                   
+                    {
+                        pages.map(page => {
+                            return <button onClick={() => setCurrentPage(page)} className={`btn btn-ghost ${currentPage === page ? 'bg-[#B397D7] text-white' : 'bg-gray-100'} `} key={page}>{page}</button>
+                        })
+                    }
+              
+                    </div>
             </div>
         </div>
     );

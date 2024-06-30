@@ -122,11 +122,10 @@ const Registration = () => {
             <div className='flex flex-1'>
                 <img src={reg} alt="" className='w-full'/>
             </div>
-            <div>
+            <div className='flex-1'>
                 <h3 className='mb-10 text-3xl font-medium'>Create Account</h3>
-                <div className='flex gap-6'>
-                <button onClick={handleGoogle} className='flex border-2 items-center gap-4 p-2'><img src={google} alt="" className='h-6 w-6'/> Countinue With Google</button>
-                <button className='flex border-2 items-center gap-4 p-2'><img src={google} alt="" className='h-6 w-6'/> Countinue With Google</button>
+                <div className='flex'>
+                <button onClick={handleGoogle} className='flex border-2 w-full items-center justify-center gap-4 py-2'><img src={google} className='h-6 w-6'/>Countinue With Google</button>
                 </div>
                 <div className='flex mt-5 flex-1 items-center'>
                     <hr className='border w-full mr-2'/>
@@ -165,7 +164,7 @@ const Registration = () => {
                         <p className='text-red-500'>Password Must be 8 characters and  password should have atleast one uppercase <br /> one lowercase and a special character</p>}
                     </div>
                     <div className='border-2 w-fit px-4 py-2'>
-                        <select {...register('role')} defaultValue={"select a role"} className='dropdown'>
+                        <select {...register('role',{required : true})} defaultValue={"select a role"} className='dropdown'>
                             <option disabled value="select a role">Select a Role</option>
                             <option value="worker">Worker</option>
                             <option value="taskCreator">Task Creator</option>

@@ -5,14 +5,17 @@ import "react-datepicker/dist/react-datepicker.css";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import useUserInfo from "../Hooks/useUserInfo";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 const Addtask = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [coins,setCoins] = useState(true);
     const [userInfo,refetch] = useUserInfo();
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const imageHost = import.meta.env.VITE_IMAGE_HOSTING;
     const hostingUrl = `https://api.imgbb.com/1/upload?key=${imageHost}`;
     const date = startDate.toDateString();
+    
     useEffect(() => {
         if(!userInfo){
             setCoins(true);
@@ -50,9 +53,9 @@ const Addtask = () => {
             task_title : data.taskTitle,
             task_detail : data.task_details,
             task_quantity : parseInt(data.task_quantity),
-            dealine : date,
+            completion_date : date,
             creator_email : userInfo.email,
-            creator_name : userInfo.displayName,
+            creator_name : userInfo.name,
             availability : parseInt(data.task_quantity)
         }
         const {task_quantity,payable_amount} = taskInfo;
@@ -67,7 +70,7 @@ const Addtask = () => {
             });
         }
         if(res.data.success){
-            axiosPublic.post('/alltasks',taskInfo)
+            axiosSecure.post('/alltasks',taskInfo)
             .then(res => {
                 if(res.data.insertedId){
                     Swal.fire({
@@ -148,7 +151,7 @@ const Addtask = () => {
                         {errors.task_detail && <p className='text-red-500'>This field must be fill</p>}
                     </div>
                     <button type="submit"  className='col-span-2 w-full py-2 bg-[#8849da] text-white'>Add Task</button>
-                </form>
+            </form>
         </div>
     );
 };

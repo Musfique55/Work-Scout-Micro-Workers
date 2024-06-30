@@ -45,16 +45,16 @@ const AuthProvider = ({children}) => {
             setUser(currentUser);
             const email = currentUser?.email;
             if(currentUser){
-                setLoading(false);
                 axiosPublic.post('/jwt',{email})
                 .then(res => {
                     if(res.data.token){
                         localStorage.setItem('access-token',res.data.token)
+                        setLoading(false);
                     }
                 })
             }else{
-                setLoading(false);
                 localStorage.removeItem('access-token');
+                setLoading(false);
             }
         })
         return () => {

@@ -103,9 +103,9 @@ const MyTasks = () => {
                                 </div>
                             </td>
                             <td>
-                                <p>{task.task_quantity}</p>
+                                <p>{task.availability}</p>
                             </td>
-                            <td>{task.task_quantity * task.payable_amount}</td>
+                            <td>{task.availability * task.payable_amount}</td>
                             <th>
                             <Link to={`update/${task._id}`}><button className="btn bg-[#e5d5fa] btn-xs">Update</button></Link>
                             </th>

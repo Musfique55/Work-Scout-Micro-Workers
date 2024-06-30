@@ -81,11 +81,7 @@ const Header = () => {
                                 Available Coin(<span className='text-red-500'>{userInfo?.coins}</span>)
                             </p> 
                         }
-                        {
-                            user && <NavLink to=''>
-                            Profile
-                        </NavLink>
-                        }
+                        
                     
                     </div>
                     
@@ -160,12 +156,6 @@ const Header = () => {
                             Available Coin(<span className='text-red-500'>{userInfo?.coins}</span>)
                         </p> 
                     }
-                    {
-                        user && 
-                        <NavLink to=''>
-                            Profile
-                        </NavLink>
-                    }
                     </div>
                     <div> 
                     <div className="flex items-center justify-end">
@@ -173,17 +163,18 @@ const Header = () => {
                             <div>
                             
                             {
-                                user ? <div>
+                                user ? 
+                                <div>
                                     <div className="rounded-full ">
-                                <img  src={user?.photoURL} onClick={() => handleRightMenu()} className="w-12 h-12 rounded-full cursor-pointer"/>
-                                </div>
-                                <div className={`bg-white absolute  ${rightMenu ? 'mt-2 right-2 transition-all' : '-mt-[500px] right-1 transition-all'}`}>
-                                <div className="bg-white p-5 space-y-3 h-fit text-center z-50">
-                                    <p className="font-medium">{userInfo?.name}</p>
-                                    <p className="bg-[#e5d5fa] px-2 py-1 rounded-full font-medium">{userInfo?.role}</p>
-                                    <button  onClick={handleLogout}>Logout</button>
-                                </div>
-                            </div>
+                                        <img  src={user?.photoURL} onClick={() => handleRightMenu()} className="w-12 h-12 rounded-full cursor-pointer"/>
+                                    </div>
+                                        <div className={`bg-white absolute  ${rightMenu ? 'mt-2 right-2 transition-all' : '-mt-[500px] right-1 transition-all'}`}>
+                                            <div className="bg-white p-5 space-y-3 h-fit text-center z-50">
+                                                <p className="font-medium">{user?.name}</p>
+                                                <p className="bg-[#e5d5fa] px-2 py-1 rounded-full font-medium">{userInfo?.role}</p>
+                                                <button  onClick={handleLogout}>Logout</button>
+                                            </div>
+                                        </div>
                                 </div> :
                                 <div className='flex flex-col items-center gap-3 lg:flex-row'> 
                                         <NavLink to='/login' className="hover:text-[rgb(38,174,97)] flex items-center gap-3 font-base font-medium">

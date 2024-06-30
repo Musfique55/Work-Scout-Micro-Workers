@@ -3,6 +3,7 @@ import useAuth from "../Hooks/useAuth";
 import Countdown from "react-countdown";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useSubmissions from "../Hooks/useSubmissions";
 
 const renderer = ({days, hours, minutes, seconds, completed }) => {
     if (completed) {
@@ -15,11 +16,11 @@ const renderer = ({days, hours, minutes, seconds, completed }) => {
         <span className="bg-purple-300 p-2 font-medium">
             {days}d  
         </span>
-        <span className="bg-purple-300 p-2 font-medium ">
-            {minutes}m
-        </span>
         <span className="bg-purple-300 p-2 font-medium">
             {hours}h
+        </span>
+        <span className="bg-purple-300 p-2 font-medium ">
+            {minutes}m
         </span>
         <span className="bg-purple-300 p-2 font-medium">
             {seconds}s
@@ -32,11 +33,13 @@ const renderer = ({days, hours, minutes, seconds, completed }) => {
 
 const Details = () => {
     const data = useLoaderData();
-    const {_id,image,task_title,task_detail,dealine,availability,payable_amount,creator_email,submission_info,task_quantity,creator_name} = data;
+    const {_id,image,task_title,task_detail,availability,payable_amount,creator_email,submission_info,task_quantity,creator_name,completion_date} = data;
     const {user} = useAuth();
     const axiosSecure = useAxiosSecure();
-    const countDownDate = new Date(dealine);
+    const countDownDate = new Date(completion_date);
+    const currentDate = new Date();
     const deadlineDate = countDownDate.getTime();
+    const [,refetch] = useSubmissions();
     const handleSubmit = e => {
         e.preventDefault();
         const date = new Date().toDateString();
@@ -68,11 +71,12 @@ const Details = () => {
                 });
                 e.target.reset();
             }
+            refetch();
         })
     }
     return ( 
-        <div className="grid grid-cols-3 gap-6  my-12 mx-5">
-            <div className="col-span-2 rounded-xl p-7 bg-gray-100">
+        <div className="grid grid-cols-1 gap-6  my-12 mx-5 lg:grid-cols-3">
+            <div className="lg:col-span-2 rounded-xl p-7 bg-gray-100">
                 <div>
                     <img src={image} alt="" className="w-full h-[300px] object-contain rounded-lg"/>
                 </div>
@@ -115,11 +119,14 @@ const Details = () => {
                     </div>
                     <div>
                         <h5 className="mt-5 mb-2">Submission Form</h5>
-                        <form onSubmit={handleSubmit}>
+                        {   availability > 0 && countDownDate > currentDate ?
+                            <form onSubmit={handleSubmit}>
                             <textarea name="taskdetails" id="" rows={4} cols={31} className="focus:outline-none p-1">
                             </textarea>
                             <button type="submit" className="w-full py-2 bg-[#8849da]  text-white">Submit</button>
-                        </form>
+                        </form> : 
+                        <p>The task is not available anymore</p>
+                        }
                     </div>
                 </div>
             </div>

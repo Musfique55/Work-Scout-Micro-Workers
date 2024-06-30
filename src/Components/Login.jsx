@@ -76,7 +76,7 @@ const Login = () => {
                 <div className='flex mb-5  items-center'>
                   <p>Enter email and password for login</p>
                 </div>
-                <button onClick={handleGoogle} className='flex border-2 items-center gap-4 p-2'><img src={google} alt="" className='h-6 w-6'/> Continue With Google</button>
+                <button onClick={handleGoogle} className='flex mb-5 border-2 items-center gap-4 justify-center w-full py-2'><img src={google} alt="" className='h-6 w-6'/> Continue With Google</button>
                 <form className='space-y-8' onSubmit={handleSubmit(onSubmit)}>
                     <div className='flex flex-col'>
                         <label htmlFor='email'>

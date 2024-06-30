@@ -31,3 +31,15 @@
     margin-left: 45%;
     color: #8849da!important;
 }
+
+@media screen and (max-width : 480px) {
+    .swiper-button-prev{
+        margin-top: 200px !important;
+        margin-left: 35%;
+    }
+
+    .swiper-button-next{
+        margin-top: 200px !important;
+        margin-right: 35%;
+    }
+}

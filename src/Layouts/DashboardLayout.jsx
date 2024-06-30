@@ -7,51 +7,37 @@ import { AiOutlineFileDone, AiOutlinePlusSquare } from "react-icons/ai";
 import { RiCoinsFill } from "react-icons/ri";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import { CgMenuLeft } from "react-icons/cg";
-import {useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoClose } from "react-icons/io5";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
+import { IoMdNotifications } from "react-icons/io";
+import useNotifications from "../Hooks/useNotifications";
 const DashboardLayout = () => {
     const {user} = useAuth();
-    const axiosSecure = useAxiosSecure();
     const [userInfo] = useUserInfo();
     const [menu,setMenu] = useState(false);
     const [rightMenu,setRightMenu] = useState(false);
-    const [location,setLocation] = useState(false);
-    const {data : notifications = [],refetch} = useQuery({
-        queryKey : ['notifications',userInfo?.email],
-        queryFn : async () => {
-            const res =  await axiosSecure.get(`/notifications?email=${userInfo?.email}`);
-            return res.data;
+    const [notification,setNotification] = useState(false);
+    const popupRef = useRef(null);  
+    const [notifications] = useNotifications();
+    const handleNotification = () => {
+        if(!popupRef.current.contains(event.target) && notification){
+            setNotification(false);
         }
-    })
-
-    refetch();
-
+    }
+    
     useEffect(() => {
-        window.addEventListener('click',() => {
-            setLocation(!location)
-        })
-    },[location])
-
-    const handleMenuToogle = () => {
-        setMenu(!menu);
-    }
-
-    const handleRightMenu = () => {
-        setRightMenu(!rightMenu)
-    }
+        if(notification){
+            window.addEventListener('click',handleNotification)
+        }else{
+            window.removeEventListener('click',handleNotification)
+        }
+        return () => {
+            window.removeEventListener('click', handleNotification);
+          };
+    },[notification]);
+    
     return (
-        <div>
-                {
-                    notifications.length > 0 && 
-                    notifications.map((noti) => {
-                        return <div key={noti._id} className={`absolute top-20 w-80 bg-white p-6 right-4 z-50 ${location ? 'hidden' : 'static'}`}>
-                            <h3>{noti.message}</h3>
-                            <p className="font-medium">Date {noti.Time}</p>
-                        </div>
-                    })
-                }
+        <div className="relative">
             <div className="hidden lg:grid lg:grid-cols-5 ">
                 <div className="border-r col-span-1 row-span-6 min-h-screen">
                     <div className="mx-8 pt-8">
@@ -104,7 +90,7 @@ const DashboardLayout = () => {
                                     <RiCoinsFill className=' text-xl font-medium'/>
                                     Purchase Coin
                             </NavLink>
-                            <NavLink to='/dashboard/payments' className='flex items-center gap-4 text-xl font-medium'>
+                            <NavLink to='/dashboard/payment-history' className='flex items-center gap-4 text-xl font-medium'>
                                     <FaHistory></FaHistory>
                                     Payment history
                             </NavLink>
@@ -134,7 +120,7 @@ const DashboardLayout = () => {
                     </div>
                 </div>
                 <div className="col-span-4 pt-8  mr-12"> 
-                    <div className="flex-1 flex items-center justify-end">
+                    <div className="flex-1 flex items-center justify-end mr-5">
                         <div className="flex flex-col gap-3 items-center ">
                             <div className="gap-7 justify-between flex items-center">
                             <p className="font-medium">Available Coins(<span className="text-red-500 font-medium">{userInfo?.coins}</span>)</p>
@@ -147,26 +133,25 @@ const DashboardLayout = () => {
                                 <p className="font-medium">{userInfo?.name}</p>
                             </div>
                         </div> 
-                    <button className="btn btn-ghost btn-circle">
-                        <div className="indicator">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-                            <span className="badge badge-xs badge-primary indicator-item"></span>
-                        </div>
-                    </button>
                     </div>
                 </div>
                 <div className="col-span-4">
                 <Outlet></Outlet>
                 </div>
             </div>
+            
+            <button onClick={() => setNotification(!notification)} ref={popupRef} className="btn z-10 btn-ghost btn-circle absolute top-8 right-0 lg:right-2 lg:top-[60px]">
+                        <div className="indicator">
+                        <IoMdNotifications className="text-2xl"/>
+                        </div>
+            </button>
 
+            <div className="flex flex-col mx-5 relative lg:hidden">
+                <div className="flex gap-3 pt-8 items-center relative">
 
-            <div className="flex flex-col mx-5 lg:hidden">
-                <div className="flex gap-5 pt-8 items-center relative">
-
-                    <div className=" flex items-center gap-5">
+                    <div className=" flex items-center gap-3">
                     
-                        <CgMenuLeft onClick={() => handleMenuToogle()} className="text-4xl"/>
+                        <CgMenuLeft  className="text-4xl" onClick={() => setMenu(!menu)}/>
                         <Link to='/'>
                         <img src={logo} alt="" className='w-[193px] h-[40px] cursor-pointer'/>
                         </Link>
@@ -175,106 +160,118 @@ const DashboardLayout = () => {
                     {/* navigation for individuals */}
                     {/* mobile menu */}
                     <div  className={`flex flex-col space-y-5 z-50 absolute bg-white p-5 ${!menu ? '-ml-[500px] transition-all' : 'ml-0 top-2 transition-all h-fit'}`}>
-                        <IoClose onClick={() => setMenu(!menu)} className="absolute text-4xl top-3 right-2"/>
-                        {
-                            userInfo?.role === 'worker' &&
-                            <>
-                                <NavLink to='/dashboard/worker-home' className='flex items-center gap-4 text-xl font-medium'>
-                                    <FaHome></FaHome>
-                                Home
+                            <IoClose onClick={() => setMenu(!menu)} className="absolute text-4xl top-3 right-2"/>
+                            {
+                                userInfo?.role === 'worker' &&
+                                <>
+                                    <NavLink to='/dashboard/worker-home' className='flex items-center gap-4 text-xl font-medium'>
+                                        <FaHome></FaHome>
+                                    Home
+                                    </NavLink>
+                                    <NavLink to='/dashboard/task-list' className='flex items-center gap-4 text-xl font-medium'>
+                                        <FaTasks></FaTasks>
+                                        Task List
+                                    </NavLink>
+                                    <NavLink to='/dashboard/my-submissions' className='flex items-center gap-4 text-xl font-medium '>
+                                        <AiOutlineFileDone className="text-2xl"/>
+                                        My Submissions
+                                    </NavLink>
+                                    <NavLink to='/dashboard/withdrawals' className='flex items-center gap-4 text-xl font-medium '>
+                                        <BiMoneyWithdraw  className="text-2xl"/>
+                                        Withdrawals
+                                    </NavLink>
+                                </>
+                            }
+                            
+                            {
+                                userInfo?.role === 'taskCreator' && 
+                                <>
+                                    <NavLink to='/dashboard/manager-home' className='flex items-center gap-4 text-xl font-medium'>
+                                        <FaHome></FaHome>
+                                    Home
                                 </NavLink>
-                                <NavLink to='/dashboard/task-list' className='flex items-center gap-4 text-xl font-medium'>
-                                    <FaTasks></FaTasks>
-                                    Task List
+                                <NavLink to='/dashboard/add-tasks' className='flex items-center gap-4 text-xl font-medium'>
+                                        <AiOutlinePlusSquare className="text-2xl"/>
+                                        Add New Tasks
                                 </NavLink>
-                                <NavLink to='/dashboard/my-submissions' className='flex items-center gap-4 text-xl font-medium '>
-                                    <AiOutlineFileDone className="text-2xl"/>
-                                    My Submissions
+                                <NavLink to='/dashboard/my-tasks' className='flex items-center gap-4 text-xl font-medium'>
+                                        <FaTasks />
+                                        My Tasks
                                 </NavLink>
-                                <NavLink to='/dashboard/withdrawals' className='flex items-center gap-4 text-xl font-medium '>
-                                    <BiMoneyWithdraw  className="text-2xl"/>
-                                    Withdrawals
+                                <NavLink to='/dashboard/purchase' className='flex items-center gap-4 text-xl font-medium'>
+                                        <RiCoinsFill className=' text-xl font-medium'/>
+                                        Purchase Coin
                                 </NavLink>
-                            </>
-                        }
-                        
-                        {
-                            userInfo?.role === 'taskCreator' && 
-                            <>
-                                <NavLink to='/dashboard/manager-home' className='flex items-center gap-4 text-xl font-medium'>
-                                    <FaHome></FaHome>
-                                Home
-                            </NavLink>
-                            <NavLink to='/dashboard/add-tasks' className='flex items-center gap-4 text-xl font-medium'>
-                                    <AiOutlinePlusSquare className="text-2xl"/>
-                                    Add New Tasks
-                            </NavLink>
-                            <NavLink to='/dashboard/my-tasks' className='flex items-center gap-4 text-xl font-medium'>
-                                    <FaTasks />
-                                    My Tasks
-                            </NavLink>
-                            <NavLink to='/dashboard/purchase' className='flex items-center gap-4 text-xl font-medium'>
-                                    <RiCoinsFill className=' text-xl font-medium'/>
-                                    Purchase Coin
-                            </NavLink>
-                            <NavLink to='/dashboard/payments' className='flex items-center gap-4 text-xl font-medium'>
-                                    <FaHistory></FaHistory>
-                                    Payment history
-                            </NavLink>
-                            </>
-                        }
-                        {
-                            userInfo?.role === 'admin' &&
-                            <>
-                                <NavLink to='/dashboard/admin-home' className='flex items-center gap-4 text-xl font-medium'>
-                                    <FaHome></FaHome>
-                                Home
+                                <NavLink to='/dashboard/payment-history' className='flex items-center gap-4 text-xl font-medium'>
+                                        <FaHistory></FaHistory>
+                                        Payment history
                                 </NavLink>
-                                <NavLink to='/dashboard/manage-users' className='flex items-center gap-4 text-xl font-medium'>
-                                            <FaUsers></FaUsers>
-                                        Manage Users
-                                </NavLink>
-                                <NavLink to='/dashboard/manage-tasks' className='flex items-center gap-4 text-xl font-medium'>
-                                        <FaTasks /> 
-                                            Manage Task
-                                </NavLink>
-                            </>
-                        }
-                        
-                        <NavLink to="/" className="mt-5 pt-5 border-t-2 flex items-center gap-4 text-xl font-medium mr-5">
-                            <FaHome></FaHome>
-                            Go to Home</NavLink>  
-                    </div>
-                    <div className="indicator">
-                            <svg onClick={() => setLocation(!location)} xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-                            {/* <span className="badge badge-xs badge-primary indicator-item"></span> */}
+                                </>
+                            }
+                            {
+                                userInfo?.role === 'admin' &&
+                                <>
+                                    <NavLink to='/dashboard/admin-home' className='flex items-center gap-4 text-xl font-medium'>
+                                        <FaHome></FaHome>
+                                    Home
+                                    </NavLink>
+                                    <NavLink to='/dashboard/manage-users' className='flex items-center gap-4 text-xl font-medium'>
+                                                <FaUsers></FaUsers>
+                                            Manage Users
+                                    </NavLink>
+                                    <NavLink to='/dashboard/manage-tasks' className='flex items-center gap-4 text-xl font-medium'>
+                                            <FaTasks /> 
+                                                Manage Task
+                                    </NavLink>
+                                </>
+                            }
+                            
+                            <NavLink to="/" className="mt-5 pt-5 border-t-2 flex items-center gap-4 text-xl font-medium mr-5">
+                                <FaHome></FaHome>
+                                Go to Home</NavLink>  
                     </div>
                     <div> 
-                    <div className="flex items-center justify-end">
-                        <div className="flex flex-col gap-3 items-center relative">
-                            <div>
-                            <div className="rounded-full ">
-                            <img  src={user?.photoURL} onClick={() => handleRightMenu()} className="w-12 h-12 rounded-full cursor-pointer"/>
-                            </div>
-                            <div className={`bg-white absolute  ${rightMenu ? 'mt-2 right-2 transition-all' : '-mt-[500px] right-2 transition-all'}`}>
-                                <div className="bg-white p-5 space-y-3 h-fit text-center z-50">
-                                    <p className="font-medium">Available Coins(<span className="text-red-500 font-medium">{userInfo?.coins}</span>)</p>
-                                    <p className="bg-[#e5d5fa] px-2 py-1 rounded-full font-medium">{userInfo?.role}</p>
-                                    <p className="font-medium">{userInfo?.name}</p>
+                        <div className="flex items-center justify-end">
+                            <div className="flex flex-col gap-3 items-center relative">
+                                <div>
+                                <div className="rounded-full">
+                                <img  onClick={() => setRightMenu(!rightMenu)} src={user?.photoURL}  className="w-12 h-12 rounded-full cursor-pointer"/>
                                 </div>
-                            </div>
-                            </div>
-                        </div> 
+                                <div className={`bg-white absolute  ${rightMenu ? 'mt-2 right-2 transition-all' : '-mt-[500px] right-2 transition-all'}`}>
+                                    <div className="bg-white p-5 space-y-3 h-fit text-center z-50">
+                                        <p className="font-medium">Available Coins(<span className="text-red-500 font-medium">{userInfo?.coins}</span>)</p>
+                                        <p className="bg-[#e5d5fa] px-2 py-1 rounded-full font-medium">{userInfo?.role}</p>
+                                        <p className="font-medium">{userInfo?.name}</p>
+                                    </div>
+                                </div>
+                                </div>
+                            </div> 
+                        </div>
                     </div>
                 </div>
-                </div>
-
+                
+                
                 <div className="col-span-4">
                 <Outlet></Outlet>
                 </div>
             </div>
-            
-
+           {
+            notification &&  <div className="w-[360px]  max-h-[400px] min-h-fit overflow-y-auto absolute
+             rounded-2xl shadow-md px-5 py-8 bg-white z-50 top-28 right-3">
+             <h4 className="text-xl font-bold text-black mb-5">Notifications</h4>
+            {   notifications.length > 0 ?
+                     notifications?.map((message) => {
+                         return <div key={message._id}>
+                             <div className="mb-5">
+                                 <p className="font-semibold mb-2">{message.message}</p>
+                                 <p>{message.Time}</p>
+                             </div>
+                         </div>
+                     }) :
+                     <p className="text-lg font-medium">No notifications yet</p>
+             }
+            </div>
+           }
         </div>
     );
 };

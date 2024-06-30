@@ -4,7 +4,6 @@ import Home from "../Pages/Home";
 import Login from "../Components/Login";
 import Registration from "../Components/Registration";
 import DashboardLayout from "../Layouts/DashboardLayout";
-import Addtask from "../Pages/Addtask";
 import MyTasks from "../Pages/MyTasks";
 import Update from "../Pages/Update";
 import Tasklist from "../Pages/Tasklist";
@@ -21,6 +20,10 @@ import ManageUsers from "../Pages/ManageUsers";
 import ManageTasks from "../Pages/ManageTasks";
 import AdminRoute from "./AdminRoute";
 import ManagerRoute from "./ManagerRoute";
+import PurchasePlan from "../Pages/PurchasePlan";
+import Purchase from "../Pages/Purchase";
+import PaymentHistory from "../Pages/PaymentHistory";
+import Addtask from "../Pages/Addtask";
 
 export const router = createBrowserRouter([
     // public route
@@ -32,7 +35,7 @@ export const router = createBrowserRouter([
         {
             path : '/',
             element : <Home></Home>
-        }
+        },
     ]
     },
     {
@@ -69,9 +72,20 @@ export const router = createBrowserRouter([
             {
                 path : 'my-tasks/update/:id',
                 element : <ManagerRoute><Update></Update></ManagerRoute>,
-                loader : ({params}) => fetch(`http://localhost:2000/alltasks/${params.id}`)
+                loader : ({params}) => fetch(`https://workscount-server.vercel.app/alltasks/${params.id}`)
             },
-            
+            {
+                path : 'purchase',
+                element : <ManagerRoute><PurchasePlan></PurchasePlan></ManagerRoute>
+            },
+            {
+                path : 'checkout',
+                element : <ManagerRoute><Purchase></Purchase></ManagerRoute>
+            },
+            {
+                path : 'payment-history',
+                element : <ManagerRoute><PaymentHistory></PaymentHistory></ManagerRoute>
+            },
             //worker routes
             {
                 path : 'worker-home',
@@ -84,7 +98,7 @@ export const router = createBrowserRouter([
             {
                 path : 'task-list/details/:id',
                 element : <PrivateRoute><Details></Details></PrivateRoute>,
-                loader : ({params}) => fetch(`http://localhost:2000/alltasks/${params.id}`)
+                loader : ({params}) => fetch(`https://workscount-server.vercel.app/alltasks/${params.id}`)
             },
             {
                 path : 'my-submissions',

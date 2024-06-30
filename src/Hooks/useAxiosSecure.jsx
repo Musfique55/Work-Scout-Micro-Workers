@@ -3,7 +3,7 @@ import useAuth from "./useAuth";
 import { useNavigate } from "react-router-dom";
 
 const axiosSecure = axios.create({
-    baseURL : 'http://localhost:2000'
+    baseURL : 'https://workscount-server.vercel.app'
 })
 const useAxiosSecure = () => {
     const {logout} = useAuth();
@@ -19,7 +19,7 @@ const useAxiosSecure = () => {
     axiosSecure.interceptors.response.use((response) => {
         return response;
     },async(error) => {
-        const status = error.response.status;
+        const status = error.response?.status;
        
         if(status === 400 || status === 401){
             await logout();

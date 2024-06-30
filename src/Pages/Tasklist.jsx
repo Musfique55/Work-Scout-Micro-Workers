@@ -22,10 +22,10 @@ const Tasklist = () => {
                     <h5 className="text-2xl font-medium">{task.task_title}</h5>
                     <div className="flex flex-col justify-between lg:flex-row">
                         <p><span className="font-semibold hidden lg:block">Creator</span> <br /> {task.creator_name}</p>
-                        <p><span className="font-semibold hidden lg:block">Deadline</span> <br /> {task.dealine}</p>
+                        <p><span className="font-semibold hidden lg:block">Deadline</span> <br /> {task.completion_date}</p>
                         <div className="flex justify-between lg:hidden">
                         <p><span className="font-semibold">Creator</span> <br /> {task.creator_name}</p>
-                        <p><span className="font-semibold">Deadline</span> <br /> {task.dealine}</p>
+                        <p><span className="font-semibold">Deadline</span> <br /> {task.completion_date}</p>
                         </div>
                         <p><span className="font-semibold">Amount</span> <br /> {task.payable_amount}</p>
                     </div>
