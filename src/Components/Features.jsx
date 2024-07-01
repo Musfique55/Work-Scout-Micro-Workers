@@ -11,8 +11,8 @@ const Features = () => {
                 <p className='lg:w-[600px] mt-5'>Access the platform from any device, whether youre on desktop or mobile. Enjoy the flexibility of managing tasks and staying productive on the go.</p>
                 <div className='grid grid-cols-1 gap-6 mt-12 lg:grid-cols-3'>
                     <div className="flex items-start gap-3">
-                        <div className='bg-[#e5d5fa] p-2 rounded-lg'>
-                        <SiMoneygram className='text-xl  text-[#8849da]'/>
+                        <div className='bg-[#f6faff] p-2 rounded-lg'>
+                        <SiMoneygram className='text-xl  text-[#295dfa]'/>
                         </div>
                         <div>
                             <h5 className='text-xl'>Earn Coins by Completing Tasks</h5>
@@ -20,8 +20,8 @@ const Features = () => {
                         </div>
                     </div>
                     <div className="flex items-start gap-3">
-                        <div className='bg-[#e5d5fa] p-2 rounded-lg'>
-                        <GiStabbedNote className='text-xl text-[#8849da]'/>
+                        <div className='bg-[#f6faff] p-2 rounded-lg'>
+                        <GiStabbedNote className='text-xl text-[#295dfa]'/>
                         </div>
                         <div>
                             <h5 className='text-xl'> Create and Manage Tasks</h5>
@@ -29,8 +29,8 @@ const Features = () => {
                         </div>
                     </div>
                     <div className="flex items-start gap-3">
-                        <div className='bg-[#e5d5fa] p-2 rounded-lg'>
-                        <FaLock className='text-xl  text-[#8849da]'></FaLock>
+                        <div className='bg-[#f6faff] p-2 rounded-lg'>
+                        <FaLock className='text-xl  text-[#295dfa]'></FaLock>
                         </div>
                         <div>
                             <h5 className='text-xl'>Secure Payments</h5>
@@ -38,8 +38,8 @@ const Features = () => {
                         </div>
                     </div>
                     <div className="flex items-start gap-3">
-                        <div className='bg-[#e5d5fa] p-2 rounded-lg'>
-                        <GiJusticeStar className='text-xl  text-[#8849da]'/>
+                        <div className='bg-[#f6faff] p-2 rounded-lg'>
+                        <GiJusticeStar className='text-xl  text-[#295dfa]'/>
                         </div>
                         <div>
                             <h5 className='text-xl'>Personalized Dashboard</h5>
@@ -47,8 +47,8 @@ const Features = () => {
                         </div>
                     </div>
                     <div className="flex items-start gap-3">
-                        <div className='bg-[#e5d5fa] p-2 rounded-lg'>
-                        <IoMdAnalytics className='text-xl text-[#8849da]'/>
+                        <div className='bg-[#f6faff] p-2 rounded-lg'>
+                        <IoMdAnalytics className='text-xl text-[#295dfa]'/>
                         </div>
                         <div>
                             <h5 className='text-xl'>Analytics and Reports</h5>
@@ -56,8 +56,8 @@ const Features = () => {
                         </div>
                     </div>
                     <div className="flex items-start gap-3">
-                        <div className='bg-[#e5d5fa] p-2 rounded-lg'>
-                        <TbTargetArrow className='text-xl text-[#8849da]'/>
+                        <div className='bg-[#f6faff] p-2 rounded-lg'>
+                        <TbTargetArrow className='text-xl text-[#295dfa]'/>
                         </div>
                         <div>
                             <h5 className='text-xl'>Goal Tracking</h5>

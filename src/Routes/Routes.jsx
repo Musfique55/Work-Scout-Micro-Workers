@@ -72,7 +72,7 @@ export const router = createBrowserRouter([
             {
                 path : 'my-tasks/update/:id',
                 element : <ManagerRoute><Update></Update></ManagerRoute>,
-                loader : ({params}) => fetch(`https://workscount-server.vercel.app/alltasks/${params.id}`)
+                loader : ({params}) => fetch(`http://localhost:2000/alltasks/${params.id}`)
             },
             {
                 path : 'purchase',
@@ -98,7 +98,7 @@ export const router = createBrowserRouter([
             {
                 path : 'task-list/details/:id',
                 element : <PrivateRoute><Details></Details></PrivateRoute>,
-                loader : ({params}) => fetch(`https://workscount-server.vercel.app/alltasks/${params.id}`)
+                loader : ({params}) => fetch(`http://localhost:2000/alltasks/${params.id}`)
             },
             {
                 path : 'my-submissions',

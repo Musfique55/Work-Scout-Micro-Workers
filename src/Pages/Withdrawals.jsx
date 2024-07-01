@@ -90,7 +90,7 @@ const Withdrawals = () => {
                     </label>
                     <input type="text" name="accountNumber" placeholder="Account Number" className="border-2 p-2 w-full focus:outline-none"/>
                 </div>
-                <button className="col-span-2 py-2 bg-purple-600 text-white font-semibold">Withdraw</button>
+                <button className="col-span-2 py-2 bg-[#295dfa] text-white font-semibold">Withdraw</button>
             </form>
         </div>
     );

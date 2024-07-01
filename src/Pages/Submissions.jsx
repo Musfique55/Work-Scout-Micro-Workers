@@ -87,7 +87,7 @@ const Submissions = () => {
                    
                     {
                         pages.map(page => {
-                            return <button onClick={() => setCurrentPage(page)} className={`btn btn-ghost ${currentPage === page ? 'bg-[#B397D7] text-white' : 'bg-gray-100'} `} key={page}>{page}</button>
+                            return <button onClick={() => setCurrentPage(page)} className={`btn btn-ghost ${currentPage === page ? 'bg-[#295dfa] text-white' : 'bg-gray-100'} `} key={page}>{page}</button>
                         })
                     }
               

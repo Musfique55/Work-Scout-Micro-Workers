@@ -29,7 +29,7 @@ const Tasklist = () => {
                         </div>
                         <p><span className="font-semibold">Amount</span> <br /> {task.payable_amount}</p>
                     </div>
-                   <Link to={`/dashboard/task-list/details/${task._id}`}><button className="bg-[#8849da] text-white mt-3 px-7 py-2 rounded-full">Details</button></Link>
+                   <Link to={`/dashboard/task-list/details/${task._id}`}><button className="bg-[#295dfa] text-white mt-3 px-7 py-2 rounded-full">Details</button></Link>
                 </div>
                 })
             }

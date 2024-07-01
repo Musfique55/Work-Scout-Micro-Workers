@@ -11,14 +11,15 @@ const TopEarners = () => {
         })
     },[axiosPublic]);
 
-    const workers = topers.filter(worker => worker.task_completion > 0);
+    const worker = topers.filter(toper => toper.task_completion > 0)
+    
     return (
         <div className="mt-12 mx-12">
             <h3 className="mb-20 text-4xl font-medium">Top Earners</h3>
             <div className="grid grid-cols-1 gap-20 lg:grid-cols-3">
                 {
-                    workers.map((toper,idx) => {
-                        return <div key={toper._id} className={`bg-[#E5D5FA] rounded-2xl flex flex-col items-center p-5 ${idx % 2 === 0 && 'lg:-mt-10 h-fit'}`}>
+                    worker?.map((toper,idx) => {
+                        return <div key={toper._id} className={`bg-[#f6faff] border-2  rounded-2xl flex flex-col items-center p-5 ${idx % 2 === 0 && 'lg:-mt-10 h-fit'}`}>
                                 <div className="pt-5">
                                     <img src={toper.image} className="w-[292px] h-[300px] object-cover  rounded-2xl" />
                                 </div>

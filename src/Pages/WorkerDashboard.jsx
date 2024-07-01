@@ -1,14 +1,13 @@
-import { FaCoins } from "react-icons/fa";
 import useUserInfo from "../Hooks/useUserInfo";
-import { AiOutlineFileDone } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
-import { HiCurrencyDollar } from "react-icons/hi";
 import useAuth from "../Hooks/useAuth";
+import { BiCoinStack, BiMoneyWithdraw } from "react-icons/bi";
+import { VscTasklist } from "react-icons/vsc";
 
 const WorkerDashboard = () => {
     const axiosSecure = useAxiosSecure();
-    const [userInfo] = useUserInfo();
+    const userInfo = useUserInfo();
     const {user} = useAuth();
     const [count,setCount] = useState([]);
     const [income,setIncome] = useState([]);
@@ -29,26 +28,26 @@ const WorkerDashboard = () => {
             <h3 className="text-5xl font-medium mb-8">Welcome Back</h3>
             <div className="flex gap-6 items-center">
                <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-                    <div className="flex items-center gap-5 bg-[#9169c5b0] text-white p-8 rounded-2xl">
-                        <FaCoins className="text-3xl"></FaCoins>
+                    <div className="flex items-center border-2 flex-1 gap-5 bg-[#f6faff] text-[#295dfa] p-8 rounded-2xl">
                         <div>
-                           <p className="text-4xl font-medium">{userInfo?.coins}</p>     
-                           <h5 className="text-2xl font-medium">Available Coins</h5>         
+                           <h5 className="text-2xl font-medium text-black">Available Coins</h5>         
+                           <p className="text-4xl mt-2 font-medium">{userInfo[0]?.coins}</p>     
                         </div>
+                        <BiCoinStack className="text-4xl"></BiCoinStack>
                     </div>
-                    <div className="flex items-center gap-5 bg-[#9169c5b0] text-white p-8 rounded-2xl">
-                        <AiOutlineFileDone className="text-4xl"/>
+                    <div className="flex items-center border-2 gap-5 bg-[#f6faff] text-[#295dfa] p-8 rounded-2xl">
                         <div>
-                           <p className="text-4xl font-medium">{count.length}</p>     
-                           <h5 className="text-2xl font-medium">Total Submissions</h5>         
+                           <h5 className="text-2xl font-medium text-black">Total Submissions</h5>         
+                           <p className="text-4xl mt-2 font-medium">{count.length}</p>     
                         </div>
+                        <VscTasklist className="text-5xl" />
                     </div>
-                    <div className="flex items-center gap-5 bg-[#9169c5b0] text-white p-8 rounded-2xl">
-                        <HiCurrencyDollar className="text-4xl"/>
+                    <div className="flex items-center gap-5 border-2 bg-[#f6faff] text-[#295dfa] p-8 rounded-2xl">
                         <div>
-                           <p className="text-4xl font-medium">{totalIncome}</p>     
-                           <h5 className="text-2xl font-medium">Total Earnings</h5>         
+                           <h5 className="text-2xl font-medium text-black">Total Earnings</h5>         
+                           <p className="text-4xl mt-2 font-medium">{totalIncome}</p>     
                         </div>
+                        <BiMoneyWithdraw  className="text-5xl"/>
                     </div>
                </div>
             </div>
@@ -60,7 +59,7 @@ const WorkerDashboard = () => {
                 </h3>
                 <table className="table">
                     {/* head */}
-                    <thead className="text-base">
+                    <thead className="text-base text-[#295dfa]">
                     <tr>
                         <th>
                         
@@ -75,7 +74,7 @@ const WorkerDashboard = () => {
                     {/* row 1 */}
                     {
                         income.map((submission,idx) => {
-                            return (<tr key={submission._id}>
+                            return (<tr key={submission._id} className="text-black">
                             <th>
                                 {idx+1}
                             </th>

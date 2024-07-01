@@ -13,23 +13,23 @@
 }
 
 .swiper-button-next{
-    border: 1px solid #8849da;
+    border: 1px solid #295dfa;
     padding: 20px;
     border-radius: 50%;
     position: absolute!important;
     margin-top:  160px !important;
     margin-right: 45%;
-    color: #8849da!important;
+    color: #295dfa!important;
 
 }
 .swiper-button-prev{
-    border: 1px solid #8849da;
+    border: 1px solid #295dfa;
     padding: 20px;
     border-radius: 50%;
     position: absolute!important;
     margin-top:  160px !important;
     margin-left: 45%;
-    color: #8849da!important;
+    color: #295dfa!important;
 }
 
 @media screen and (max-width : 480px) {

@@ -1,8 +1,8 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
-import logo from '../assets/logo.png';
+import logo from '../assets/logo2.png';
 import useAuth from "../Hooks/useAuth";
 import useUserInfo from "../Hooks/useUserInfo";
-import { FaHistory, FaHome, FaTasks, FaUsers } from "react-icons/fa";
+import { FaChevronDown, FaChevronUp, FaHistory, FaHome, FaTasks, FaUsers } from "react-icons/fa";
 import { AiOutlineFileDone, AiOutlinePlusSquare } from "react-icons/ai";
 import { RiCoinsFill } from "react-icons/ri";
 import { BiMoneyWithdraw } from "react-icons/bi";
@@ -19,11 +19,13 @@ const DashboardLayout = () => {
     const [notification,setNotification] = useState(false);
     const popupRef = useRef(null);  
     const [notifications] = useNotifications();
+    const [profile,setProfile] = useState(false);
     const handleNotification = () => {
         if(!popupRef.current.contains(event.target) && notification){
             setNotification(false);
         }
     }
+
     
     useEffect(() => {
         if(notification){
@@ -35,6 +37,7 @@ const DashboardLayout = () => {
             window.removeEventListener('click', handleNotification);
           };
     },[notification]);
+
     
     return (
         <div className="relative">
@@ -122,14 +125,18 @@ const DashboardLayout = () => {
                 <div className="col-span-4 pt-8  mr-12"> 
                     <div className="flex-1 flex items-center justify-end mr-5">
                         <div className="flex flex-col gap-3 items-center ">
-                            <div className="gap-7 justify-between flex items-center">
-                            <p className="font-medium">Available Coins(<span className="text-red-500 font-medium">{userInfo?.coins}</span>)</p>
+                            <div className="justify-between gap-2 flex items-center">
                             <div className=" rounded-full">
-                            <img  src={user?.photoURL} className="w-12 h-12 rounded-full"/>
+                                <img  src={user?.photoURL}  className="w-12 h-12 rounded-full"/>
                             </div>
+                            {
+                                !profile ?  <button onClick={() => {setProfile(!profile)}}><FaChevronDown  className="cursor-pointer"/></button> : <FaChevronUp onClick={() => {setProfile(!profile)}} className="cursor-pointer"></FaChevronUp>
+                            }
+                           
                             </div>
-                            <div className="gap-3 flex items-center">
-                                <p className="bg-[#e5d5fa] px-2 py-1 rounded-full font-medium">{userInfo?.role}</p>
+                            <div className={`space-y-3 absolute bg-white top-24 p-3 rounded-lg border right-1 ${!profile ? 'hidden' : ''}`}>
+                                <p className="font-medium">Available Coins(<span className="text-red-500 font-medium">{userInfo?.coins}</span>)</p>
+                                <p className="bg-[#f6faff] text-[#295dfa] px-3 py-1 rounded-full font-medium w-fit">{userInfo?.role}</p>
                                 <p className="font-medium">{userInfo?.name}</p>
                             </div>
                         </div> 
@@ -140,7 +147,7 @@ const DashboardLayout = () => {
                 </div>
             </div>
             
-            <button onClick={() => setNotification(!notification)} ref={popupRef} className="btn z-10 btn-ghost btn-circle absolute top-8 right-0 lg:right-2 lg:top-[60px]">
+            <button onClick={() => setNotification(!notification)} ref={popupRef} className="btn z-10 btn-ghost btn-circle absolute top-8 right-0 lg:right-2 lg:top-[32px]">
                         <div className="indicator">
                         <IoMdNotifications className="text-2xl"/>
                         </div>
