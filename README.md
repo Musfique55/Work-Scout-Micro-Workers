@@ -72,3 +72,4 @@
 - Axios
 - Sweet Alert
 
+## If you want to run this in local computer simply just clone the repository and paste the following command in client side code **npm i**  then change the url from useAxiosPublic and useAxiosSecure to localhost. You can make changes in the website
