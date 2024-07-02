@@ -1,5 +1,6 @@
 # Work Scout Website
 # Live Link : https://work-scout-3a179.web.app
+# Server Side : https://github.com/Musfique55/Work-scout-server
 
 # Admin Login Info
 # Email : admin@gmail.com
