@@ -72,4 +72,29 @@
 - Axios
 - Sweet Alert
 
-## If you want to run this in local computer simply just clone the repository and paste the following command in client side code **npm i**  then change the url from useAxiosPublic and useAxiosSecure to localhost. You can make changes in the website
+## Running the Project Locally
+ Follow these steps to set up the project on your local environment:
+
+## Clone The Repository
+```bash
+git clone <repository-url>
+cd <project-folder>
+```
+## Running the Project Locally
+Follow these steps to set up the project on your local environment:
+
+## Install Dependencies
+Navigate to the client-side folder and install the required dependencies:
+```bash
+npm install
+```
+## Update API URLs
+In the project files where useAxiosPublic and useAxiosSecure are defined, update the URLs to point to localhost for your local backend.
+
+## Start the Development Server
+To start the server, run:
+```bash
+npm start
+```
+## Make Changes to the Website
+Now you can make changes to the website. The development server will automatically reload to reflect your updates.
