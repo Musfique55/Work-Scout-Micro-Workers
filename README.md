@@ -80,8 +80,6 @@
 git clone <repository-url>
 cd <project-folder>
 ```
-## Running the Project Locally
-Follow these steps to set up the project on your local environment:
 
 ## Install Dependencies
 Navigate to the client-side folder and install the required dependencies:
